@@ -1,9 +1,0 @@
-A young kind-hearted man from Brooklyn.
-He became a super soldier and defends Earth.
-
-Strength: 75
-Stamina: 75
-Evasion: 40
-Defense: 80
-Accuracy: 60
-Instinct: 50

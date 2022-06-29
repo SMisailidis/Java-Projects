@@ -1,9 +1,0 @@
-He is Groot... he is Groot... he is Groot... he is Groot.
-He is also one of the Guardians of the Galaxy.
-
-Strength: 70
-Stamina: 65
-Evasion: 55
-Defense: 80
-Accuracy: 45
-Instinct: 65

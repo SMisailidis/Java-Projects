@@ -1,8 +1,0 @@
-An arrogant doctor that damaged his hands in an accident, became the master of the Mystic Arts.
-
-Strength: 40
-Stamina: 50
-Evasion: 80
-Defense: 80
-Accuracy: 65
-Instinct: 65

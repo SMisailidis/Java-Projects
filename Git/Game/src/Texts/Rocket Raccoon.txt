@@ -1,8 +1,0 @@
-A great shooter, Rocket is the first rabbit to join the Guardians of the Galaxy...
-
-Strength: 45
-Stamina: 70
-Evasion: 65
-Defense: 50
-Accuracy: 70
-Instinct: 80
