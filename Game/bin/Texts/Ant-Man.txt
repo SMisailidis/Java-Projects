@@ -1,0 +1,8 @@
+An ex-convict, Scot became a hero when Hank Pym allowed him to use his suit and Pym particles.
+
+Strength: 45
+Stamina: 70
+Evasion: 50
+Defense: 60
+Accuracy: 75
+Instinct: 80

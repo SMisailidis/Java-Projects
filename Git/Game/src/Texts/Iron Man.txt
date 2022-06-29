@@ -1,0 +1,9 @@
+Genius, billionaire, playboy, philanthropist.
+A hero defending Earth with the suits he creates.
+
+Strength: 50
+Stamina: 75
+Evasion: 60
+Defense: 70
+Accuracy: 85
+Instinct: 40

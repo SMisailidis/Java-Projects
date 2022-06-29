@@ -1,0 +1,9 @@
+A teenager from Queens that got bit by a radioactive spider.
+He learnt that with great power, there must come great responsibility.
+
+Strength: 70
+Stamina: 55
+Evasion: 80
+Defense: 40
+Accuracy: 35
+Instinct: 100

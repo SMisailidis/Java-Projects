@@ -1,0 +1,9 @@
+Son of Odin and the God of Thunder.
+King of Asgard and defender of the Nine Realms.
+
+Strength: 85
+Stamina: 70
+Evasion: 60
+Defense: 70
+Accuracy: 50
+Instinct: 45

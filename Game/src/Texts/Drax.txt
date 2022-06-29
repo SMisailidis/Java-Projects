@@ -1,0 +1,9 @@
+He lost his family at the hands of the Mad Titan.
+His journey to vengeance ended up with him joining the Guardians of the Galaxy.
+
+Strength: 80
+Stamina: 70
+Evasion: 55
+Defense: 70
+Accuracy: 45
+Instinct: 60
