@@ -14,7 +14,7 @@ public class SQLiteConnection {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Windows 10\\eclipse-workspace\\ValidCard\\Cards.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Windows 10\\eclipse-workspace\\BankSimulator\\Cards.db");
             conn.setAutoCommit(false);
 
             stmt = conn.createStatement();

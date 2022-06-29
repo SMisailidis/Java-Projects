@@ -12,11 +12,12 @@ public class GUI extends JFrame implements ActionListener {
 
 	private ArrayList<String> queryResults = new ArrayList<>();
 
-    private JPanel panel1;
     private JPanel panel3;
 
     private JFrame frame2;
 
+    private JLabel label2;
+    private JLabel label5;
     private JLabel label4;
 
     private JButton button5;
@@ -48,11 +49,12 @@ public class GUI extends JFrame implements ActionListener {
 
         frame2 = new JFrame();
 
-        panel1 = new JPanel();
         panel3 = new JPanel();
 
+        label2 = new JLabel("Press \"Continue\"");
         label4 = new JLabel("------------------------(Card functions)------------------------");
-
+        label5 = new JLabel("Welcome Back " + this.queryResults.get(1));
+        
         button5 = new JButton("Deposit");
         button5.setBorder(BorderFactory.createLineBorder(ForegroundButton));
 
@@ -65,21 +67,21 @@ public class GUI extends JFrame implements ActionListener {
         button8= new JButton("Contant Bank");
         button8.setBorder(BorderFactory.createLineBorder(ForegroundButton));
 
-        this.setContentPane(panel1);
-        this.setVisible(true);
-        this.setSize(300,200);
-        this.setTitle("Card Page");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-        //--Third Window--//
-
         frame2.setSize(300,200);
         frame2.add(panel3);
+        frame2.setResizable(false);
+        frame2.setLocationRelativeTo(null);
+        frame2.setVisible(true);
 
         panel3.setSize(300,200);
         panel3.setLayout(null);
-
+        
+        label5.setBounds(75,15,260,20);
+        label5.setForeground(ForegroundLabel);
+        
+        label2.setBounds(95,10,300,100);
+        label2.setForeground(ForegroundLabel);
+        
         label4.setForeground(ForegroundLabel);
         label4.setBounds(0,30,300,50);
 
@@ -104,14 +106,14 @@ public class GUI extends JFrame implements ActionListener {
         button8.addActionListener(this);
 
         panel3.setBackground(new Color(77, 80, 79));
+        panel3.add(label5);
         panel3.add(label4);
-
+        
+        
         panel3.add(button5);
         panel3.add(button6);
         panel3.add(button7);
         panel3.add(button8);
-
-        //----------------//
 
     }
 
@@ -128,7 +130,8 @@ public class GUI extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource().equals(button5)) {
+    	
+    	if (e.getSource().equals(button5)) {
 
             String deposit;
 

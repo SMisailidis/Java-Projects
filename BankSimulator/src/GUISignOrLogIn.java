@@ -178,7 +178,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         this.setSize(300,250);
         this.setTitle("Welcome to our bank!");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        this.setLocationRelativeTo(null);
         this.add(button1);
         this.add(button2);
         this.setLayout(null);
