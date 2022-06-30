@@ -75,6 +75,7 @@ public class GUI extends JFrame implements ActionListener {
 
         panel3.setSize(300,200);
         panel3.setLayout(null);
+        panel3.setBackground(new Color(77, 80, 79));
         
         label5.setBounds(75,15,260,20);
         label5.setForeground(ForegroundLabel);
@@ -105,11 +106,9 @@ public class GUI extends JFrame implements ActionListener {
         button8.setBounds(183,130,100,30);
         button8.addActionListener(this);
 
-        panel3.setBackground(new Color(77, 80, 79));
+        
         panel3.add(label5);
         panel3.add(label4);
-        
-        
         panel3.add(button5);
         panel3.add(button6);
         panel3.add(button7);
