@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +21,8 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
     private JPanel panel2;
     private JPanel DeleteCardPanel;
 
+    private JLabel label1;
+    private JLabel label2;
     private JLabel DeleteCardLabel;
 
     private JTextField textField1;
@@ -57,7 +61,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         button1 = new JButton("Sign in");
         button1.setForeground(ForegroundButton);
         button1.setBackground(BackgroundButton);
-        button1.setBounds(1,80,100,30);
+        button1.setBounds(0,80,100,30);
         button1.addActionListener(this);
         button1.setBorder(BorderFactory.createLineBorder(ForegroundButton));
 
@@ -71,7 +75,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         button3 = new JButton("See your card?");
         button3.setForeground(ForegroundButton);
         button3.setBackground(BackgroundButton);
-        button3.setBounds(1,130,100,30);
+        button3.setBounds(0,130,100,30);
         button3.addActionListener(this);
         button3.setBorder(BorderFactory.createLineBorder(ForegroundButton));
 
@@ -82,28 +86,41 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         button4.addActionListener(this);
         button4.setBorder(BorderFactory.createLineBorder(ForegroundButton));
 
+        DeleteCardPanel = new JPanel();
+        label1 = new JLabel("Hello, welcome to our Bank!");
+        label2 = new JLabel("-------------------(How can i assist you?)-------------------");
+
         this.setContentPane(panel1);
         this.setVisible(true);
         this.setSize(300,200);
         this.setTitle("Welcome to our bank!");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.add(button1);
         this.add(button2);
         this.add(button3);
         this.add(button4);
+        this.add(label1);
+        this.add(label2);
         this.setLayout(null);
-
-        DeleteCardPanel = new JPanel();
 
         DeleteCardPanel.setBackground(new Color(77, 80, 79));
         DeleteCardPanel.setLayout(null);
+
+        label1.setBounds(63,0,180,30);
+        label1.setForeground(ForegroundButton);
+        label1.setBackground(BackgroundButton);
+
+        label2.setBounds(0,35,300,30);
+        label2.setForeground(ForegroundButton);
+        label2.setBackground(BackgroundButton);
 
         DeleteCardFrame = new JFrame();
         DeleteCardFrame.setSize(500,250);
         DeleteCardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        textField1 = new JTextField("Insert your Lastname");
+        textField1 = new JTextField("Insert your Lastname...");
         textField1.setBackground(BackgroundButton);
         textField1.setForeground(ForegroundButton);
         textField1.setBorder(BorderFactory.createLineBorder(ForegroundButton));
@@ -125,8 +142,6 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         checkBox1.addActionListener(this);
         checkBox1.setBorder(BorderFactory.createLineBorder(ForegroundButton));
 
-        
-
         passwordField1 = new JPasswordField();
         passwordField1.setBackground(BackgroundButton);
         passwordField1.setForeground(ForegroundButton);
@@ -139,6 +154,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         frame1.setSize(350,220);
         frame1.setLayout(null);
         frame1.setLocationRelativeTo(null);
+        frame1.setResizable(false);
         frame1.add(panel2);
 
         panel2.setSize(350,220);

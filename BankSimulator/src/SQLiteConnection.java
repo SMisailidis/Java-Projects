@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class SQLiteConnection {
 
-    protected ArrayList<String> receivedData = new ArrayList<String>();
+    private ArrayList<String> receivedData = new ArrayList<String>();
 
     public boolean makeDMLQuery(String query) {
 
