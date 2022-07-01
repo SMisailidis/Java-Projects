@@ -4,8 +4,7 @@ public class Card {
 
     private String card;
     private ArrayList<String> cardData = new ArrayList<String>();
-  
-    
+
 	public Card(String card) {
     	
     	this.card = card;
@@ -22,6 +21,7 @@ public class Card {
     }
 	
 	public ArrayList<String> getCardData() {
+		
 		return this.cardData;
 	}
 }

@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
-
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,39 +11,52 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
     private  JFrame DeleteCardFrame;
-    private JFrame frame1;
-    private JFrame frame2;
-	
-    private String card;
+    private JFrame ForgotCardNumberFrame;
+    private JFrame SignInFrame;
+    private JFrame LogInFrame;
 
-    private JPanel panel1;
-    private JPanel panel2;
-    private JPanel panel3;
+    private String card;
+    private Boolean LogInPINAppear = false;
+    private int count = 3;
+
+    private ImageIcon icon; // Image icon
+
+    private JPanel MainPagePanel;
+    private JPanel ForgotCardNumberPanel;
+    private JPanel SignInPanel;
+    private JPanel LogInPanel;
     private JPanel DeleteCardPanel;
 
-    private JLabel label1;
-    private JLabel label2;
-    private JLabel label3;
+    private JLabel MainPageWelcomeLabel;
+    private JLabel MainPageAssistLabel;
+    private JLabel SignInPINLabel;
+    private JLabel LogInLabel;
     private JLabel DeleteCardLabel;
+    private JLabel ForgotCardNumberPINLabel;
 
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+    
+    private JTextField ForgotCardNumberLastNameTextField;
+    private JTextField SignInFirstNameTextField;
+    private JTextField SignInLastNameTextField;
+    private JTextField LogInCardNumberTextField;
 
-    private JPasswordField passwordField1;
-    private JPasswordField passwordField2;
+    private JPasswordField ForgotCardNumberPasswordField;
+    private JPasswordField SignInPINPasswordField;
+    private JPasswordField LogInPINPasswordField;
+    private JPasswordField ForgotCardNumberPINTextField;
 
+    private JButton MainPageSignInButton;
+    private JButton MainPageLoginInButton;
+    private JButton MainPageForgotCardNumberButton;
+    private JButton MainPageInformationsButton;
+    private JButton ForgotCardNumberSubmitRequest;
+    private JButton SignInSubmitRequestButton;
+    private JButton SignInReturnToMainPageButton;
+    private JButton LogInReturnToMainPageButton;
+    private JButton ForgotCardNumberReturnToMainPageButton;
+    private JButton LogInSubmitRequestButton;
 
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
-    private JButton button6;
-    private JButton button7;
-
-    private JCheckBox checkBox1;
+    private JCheckBox ForgotCardNumberCheckBox;
 
     private Color ForegroundLabel;
     private Color ForegroundButton;
@@ -59,306 +70,342 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
 
     	sqlConn = new SQLiteConnection();
         
-
+        //--Colors--\\
         ForegroundLabel = new Color(43, 249, 194);
         ForegroundButton = new Color(43, 249, 194);
         BackgroundButton = new Color(77, 80, 79);
+        //----------\\
 
-        panel1 = new JPanel();
-        panel1.setBackground(new Color(77, 80, 79));
+        icon = new ImageIcon("BankSimulator\\Home.png");
 
-        button1 = new JButton("Sign in");
-        button1.setForeground(ForegroundButton);
-        button1.setBackground(BackgroundButton);
-        button1.setBounds(0,80,100,30);
-        button1.addActionListener(this);
-        button1.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        //--Frames--\\
+        ForgotCardNumberFrame = new JFrame();
+        ForgotCardNumberFrame.setTitle("Retrieval frame");
+        ForgotCardNumberFrame.setSize(350,220);
+        ForgotCardNumberFrame.setLayout(null);
+        ForgotCardNumberFrame.setLocationRelativeTo(null);
+        ForgotCardNumberFrame.setResizable(false);
+        ForgotCardNumberFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        button2 = new JButton("Log in");
-        button2.setForeground(ForegroundButton);
-        button2.setBackground(BackgroundButton);
-        button2.setBounds(183,80,100,30);
-        button2.addActionListener(this);
-        button2.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        SignInFrame = new JFrame();
+        SignInFrame.setTitle("Sign into our Bank!");
+        SignInFrame.setSize(350,250);
+        SignInFrame.setLayout(null);
+        SignInFrame.setLocationRelativeTo(null);
+        SignInFrame.setResizable(false);
+        SignInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        DeleteCardFrame = new JFrame();
+        DeleteCardFrame.setTitle("Failed to log in!");
+        DeleteCardFrame.setSize(500,250);
+        DeleteCardFrame.setLayout(null);
+        DeleteCardFrame.setLocationRelativeTo(null);
+        DeleteCardFrame.setResizable(false);
+        DeleteCardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        button3 = new JButton("See your card?");
-        button3.setForeground(ForegroundButton);
-        button3.setBackground(BackgroundButton);
-        button3.setBounds(0,130,100,30);
-        button3.addActionListener(this);
-        button3.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        LogInFrame = new JFrame();
+        LogInFrame.setTitle("Log into our bank");
+        LogInFrame.setSize(350,250);
+        LogInFrame.setLayout(null);
+        LogInFrame.setLocationRelativeTo(null);
+        LogInFrame.setResizable(false);
+        LogInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //----------\\
 
-        button4 = new JButton("Informations");
-        button4.setForeground(ForegroundButton);
-        button4.setBackground(BackgroundButton);
-        button4.setBounds(183,130,100,30);
-        button4.addActionListener(this);
-        button4.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-
-        DeleteCardPanel = new JPanel();
-        label1 = new JLabel("Hello, welcome to our Bank!");
-        label2 = new JLabel("-------------------(How may i assist you?)-------------------");
-
-        this.setContentPane(panel1);
-        this.setVisible(true);
-        this.setSize(300,200);
+        //--Panels--\\
+        MainPagePanel = new JPanel();
+        MainPagePanel.setBackground(new Color(77, 80, 79));
+        this.setContentPane(MainPagePanel);
+        this.setSize(298,198);
         this.setTitle("Welcome to our bank!");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.add(button1);
-        this.add(button2);
-        this.add(button3);
-        this.add(button4);
-        this.add(label1);
-        this.add(label2);
         this.setLayout(null);
 
+        ForgotCardNumberPanel = new JPanel();
+        ForgotCardNumberPanel.setBackground(new Color(77, 80, 79));
+        ForgotCardNumberPanel.setSize(350,220);
+        ForgotCardNumberPanel.setLayout(null);
+
+        SignInPanel = new JPanel();
+        SignInPanel.setBackground(new Color(77, 80, 79));
+        SignInPanel.setSize(350,250);
+        SignInPanel.setLayout(null);
+
+        DeleteCardPanel = new JPanel();
         DeleteCardPanel.setBackground(new Color(77, 80, 79));
+        DeleteCardPanel.setSize(500,250);
         DeleteCardPanel.setLayout(null);
 
-        label1.setBounds(63,0,180,30);
-        label1.setForeground(ForegroundButton);
-        label1.setBackground(BackgroundButton);
+        LogInPanel = new JPanel();
+        LogInPanel.setBackground(new Color(77, 80, 79));
+        LogInPanel.setSize(500,250);
+        LogInPanel.setLayout(null);
+        //----------\\
 
-        label2.setBounds(0,35,300,30);
-        label2.setForeground(ForegroundButton);
-        label2.setBackground(BackgroundButton);
-
-        DeleteCardFrame = new JFrame();
-        DeleteCardFrame.setSize(500,250);
-        DeleteCardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        textField1 = new JTextField("Insert your Lastname...");
-        textField1.setBackground(BackgroundButton);
-        textField1.setForeground(ForegroundButton);
-        textField1.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-
-        textField2 = new JTextField("PIN");
-        textField2.setBackground(BackgroundButton);
-        textField2.setForeground(ForegroundButton);
-        textField2.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-
-        textField3 = new JTextField("Give me your first name");
-        textField3.setBackground(BackgroundButton);
-        textField3.setForeground(ForegroundButton);
-        textField3.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        textField3.setBounds(55,20,222,20);
-
-        textField4 = new JTextField("Give me your last name");
-        textField4.setBackground(BackgroundButton);
-        textField4.setForeground(ForegroundButton);
-        textField4.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        textField4.setBounds(55,60,222,20);
-
-        label3 = new JLabel("Give me your PIN ↓");
-        label3.setForeground(ForegroundButton);
-        label3.setBackground(BackgroundButton);
-        label3.setBounds(114,95,222,20);
-
-        passwordField2 = new JPasswordField();
-        passwordField2.setBackground(BackgroundButton);
-        passwordField2.setForeground(ForegroundButton);
-        passwordField2.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        passwordField2.setBounds(111,125,111,20);
+        //--Labels--\\
+        MainPageWelcomeLabel = new JLabel("Hello, welcome to our Bank!");
+        MainPageWelcomeLabel.setForeground(ForegroundButton);
+        MainPageWelcomeLabel.setBackground(BackgroundButton);
+        MainPageWelcomeLabel.setBounds(63,0,180,30);
         
-        button5 = new JButton("Sumbit request");
-        button5.setForeground(ForegroundButton);
-        button5.setBackground(BackgroundButton);
-        button5.addActionListener(this);
-        button5.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageAssistLabel = new JLabel("-------------------(How may i assist you?)-------------------");
+        MainPageAssistLabel.setForeground(ForegroundButton);
+        MainPageAssistLabel.setBackground(BackgroundButton);
+        MainPageAssistLabel.setBounds(0,35,300,30);
 
-        button6 = new JButton("Submit");
-        button6.setForeground(ForegroundButton);
-        button6.setBackground(BackgroundButton);
-        button6.addActionListener(this);
-        button6.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        button6.setBounds(70, 170, 80,30);
-
-        button7 = new JButton("Cancel");
-        button7.setForeground(ForegroundButton);
-        button7.setBackground(BackgroundButton);
-        button7.addActionListener(this);
-        button7.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        button7.setBounds(180, 170, 80,30);
-
-        panel3 = new JPanel();
-        panel3.setBackground(new Color(77, 80, 79));
-
-        panel3.setSize(350,250);
-        panel3.add(textField3);
-        panel3.add(textField4);
-        panel3.add(passwordField2);
-        panel3.add(label3);
-        panel3.add(button6);
-        panel3.add(button7);
-        panel3.setLayout(null);
-
-        frame2 = new JFrame();
-        frame2.setSize(350,250);
-        frame2.setLayout(null);
-        frame2.setLocationRelativeTo(null);
-        frame2.setResizable(false);
-        frame2.add(panel3);
-
-        checkBox1 = new JCheckBox("Check your card!");
-        checkBox1.setBackground(BackgroundButton);
-        checkBox1.setForeground(ForegroundButton);
-        checkBox1.addActionListener(this);
-        checkBox1.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-
-        passwordField1 = new JPasswordField();
-        passwordField1.setBackground(BackgroundButton);
-        passwordField1.setForeground(ForegroundButton);
-        passwordField1.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-
-        panel2 = new JPanel();
-        panel2.setBackground(new Color(77, 80, 79));
-
-        panel2.setSize(350,220);
-        panel2.add(textField1);
-        panel2.add(passwordField1);
-        panel2.add(textField2);
-        panel2.add(button5);
-        panel2.add(checkBox1);
-        panel2.setLayout(null);
-
-        frame1 = new JFrame();
-        frame1.setSize(350,220);
-        frame1.setLayout(null);
-        frame1.setLocationRelativeTo(null);
-        frame1.setResizable(false);
-        frame1.setResizable(false);
-        frame1.add(panel2);
-
-        textField1.setBounds(25,25,200,19);
-        textField2.setBounds(240,25,70,19);
-
-        checkBox1.setBounds(108,140, 119, 35);
-        passwordField1.setBounds(69,115,200,20);
-
-        button5.setBounds(108, 65, 119,30);
+        SignInPINLabel = new JLabel("Give me your PIN ↓");
+        SignInPINLabel.setForeground(ForegroundButton);
+        SignInPINLabel.setBackground(BackgroundButton);
+        SignInPINLabel.setBounds(114,95,222,20);
 
         DeleteCardLabel = new JLabel("Your account has been locked! You have to create a new one!");
         DeleteCardLabel.setForeground(ForegroundLabel);
         DeleteCardLabel.setBounds(75,50,400,50);
 
+        LogInLabel = new JLabel("Give me your PIN ↓");
+        LogInLabel.setForeground(ForegroundButton);
+        LogInLabel.setBackground(BackgroundButton);
+        LogInLabel.setBounds(114,75,222,20);
+
+        ForgotCardNumberPINLabel = new JLabel("PIN ↓");
+        ForgotCardNumberPINLabel.setForeground(ForegroundButton);
+        ForgotCardNumberPINLabel.setBackground(BackgroundButton);
+        ForgotCardNumberPINLabel.setBounds(262,05,40,20);
+        //----------\\
+
+        //--Buttons--\\
+        MainPageSignInButton = new JButton("Sign in");
+        MainPageSignInButton.setForeground(ForegroundButton);
+        MainPageSignInButton.setBackground(BackgroundButton);
+        MainPageSignInButton.addActionListener(this);
+        MainPageSignInButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageSignInButton.setBounds(0,80,100,30);
+
+        MainPageLoginInButton = new JButton("Log in");
+        MainPageLoginInButton.setForeground(ForegroundButton);
+        MainPageLoginInButton.setBackground(BackgroundButton);
+        MainPageLoginInButton.addActionListener(this);
+        MainPageLoginInButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageLoginInButton.setBounds(183,80,100,30);
+
+        MainPageForgotCardNumberButton = new JButton("See your card?");
+        MainPageForgotCardNumberButton.setForeground(ForegroundButton);
+        MainPageForgotCardNumberButton.setBackground(BackgroundButton);
+        MainPageForgotCardNumberButton.addActionListener(this);
+        MainPageForgotCardNumberButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageForgotCardNumberButton.setBounds(0,130,100,30);
+
+        MainPageInformationsButton = new JButton("Informations");
+        MainPageInformationsButton.setForeground(ForegroundButton);
+        MainPageInformationsButton.setBackground(BackgroundButton);
+        MainPageInformationsButton.addActionListener(this);
+        MainPageInformationsButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageInformationsButton.setBounds(183,130,100,30);
+
+        ForgotCardNumberSubmitRequest = new JButton("Submit request");
+        ForgotCardNumberSubmitRequest.setForeground(ForegroundButton);
+        ForgotCardNumberSubmitRequest.setBackground(BackgroundButton);
+        ForgotCardNumberSubmitRequest.addActionListener(this);
+        ForgotCardNumberSubmitRequest.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        ForgotCardNumberSubmitRequest.setBounds(108, 65, 119,30);
+
+        SignInSubmitRequestButton = new JButton("Submit");
+        SignInSubmitRequestButton.setForeground(ForegroundButton);
+        SignInSubmitRequestButton.setBackground(BackgroundButton);
+        SignInSubmitRequestButton.addActionListener(this);
+        SignInSubmitRequestButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        SignInSubmitRequestButton.setBounds(128, 170, 80,30);
+
+        SignInReturnToMainPageButton = new JButton(icon);
+        SignInReturnToMainPageButton.setForeground(ForegroundButton);
+        SignInReturnToMainPageButton.setBackground(BackgroundButton);
+        SignInReturnToMainPageButton.addActionListener(this);
+        SignInReturnToMainPageButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        SignInReturnToMainPageButton.setBounds(5, 5, 35,35);
+
+        LogInReturnToMainPageButton = new JButton(icon);
+        LogInReturnToMainPageButton.setForeground(ForegroundButton);
+        LogInReturnToMainPageButton.setBackground(BackgroundButton);
+        LogInReturnToMainPageButton.addActionListener(this);
+        LogInReturnToMainPageButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        LogInReturnToMainPageButton.setBounds(5, 5, 35,35);
+        
+        ForgotCardNumberReturnToMainPageButton = new JButton(icon);
+        ForgotCardNumberReturnToMainPageButton.setForeground(ForegroundButton);
+        ForgotCardNumberReturnToMainPageButton.setBackground(BackgroundButton);
+        ForgotCardNumberReturnToMainPageButton.addActionListener(this);
+        ForgotCardNumberReturnToMainPageButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        ForgotCardNumberReturnToMainPageButton.setBounds(5, 5, 35,35);
+
+        LogInSubmitRequestButton = new JButton("Submit");
+        LogInSubmitRequestButton.setForeground(ForegroundButton);
+        LogInSubmitRequestButton.setBackground(BackgroundButton);
+        LogInSubmitRequestButton.addActionListener(this);
+        LogInSubmitRequestButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        LogInSubmitRequestButton.setBounds(128, 150, 80,30);
+        //-----------\\
+
+        //--Checkboxes--\\
+        ForgotCardNumberCheckBox = new JCheckBox("Check your card!");
+        ForgotCardNumberCheckBox.setBackground(BackgroundButton);
+        ForgotCardNumberCheckBox.setForeground(ForegroundButton);
+        ForgotCardNumberCheckBox.addActionListener(this);
+        ForgotCardNumberCheckBox.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        ForgotCardNumberCheckBox.setBounds(108,140, 119, 35); 
+        //--------------\\
+        
+        //--TextFields--\\
+        ForgotCardNumberLastNameTextField = new JTextField("Insert your Lastname...");
+        ForgotCardNumberLastNameTextField.setBackground(BackgroundButton);
+        ForgotCardNumberLastNameTextField.setForeground(ForegroundButton);
+        ForgotCardNumberLastNameTextField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        ForgotCardNumberLastNameTextField.setBounds(50,25,185,19);
+
+        SignInFirstNameTextField = new JTextField("Give me your first name");
+        SignInFirstNameTextField.setBackground(BackgroundButton);
+        SignInFirstNameTextField.setForeground(ForegroundButton);
+        SignInFirstNameTextField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        SignInFirstNameTextField.setBounds(55,20,222,20);
+
+        SignInLastNameTextField = new JTextField("Give me your last name");
+        SignInLastNameTextField.setBackground(BackgroundButton);
+        SignInLastNameTextField.setForeground(ForegroundButton);
+        SignInLastNameTextField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        SignInLastNameTextField.setBounds(55,60,222,20);
+
+        LogInCardNumberTextField = new JTextField("Give me your card number");
+        LogInCardNumberTextField.setBackground(BackgroundButton);
+        LogInCardNumberTextField.setForeground(ForegroundButton);
+        LogInCardNumberTextField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        LogInCardNumberTextField.setBounds(55,40,222,20);
+        //--------------\\
+
+        //--PasswordFields--\\
+        ForgotCardNumberPasswordField = new JPasswordField();
+        ForgotCardNumberPasswordField.setBackground(BackgroundButton);
+        ForgotCardNumberPasswordField.setForeground(ForegroundButton);
+        ForgotCardNumberPasswordField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        ForgotCardNumberPasswordField.setBounds(69,115,200,20);
+
+        SignInPINPasswordField = new JPasswordField();
+        SignInPINPasswordField.setBackground(BackgroundButton);
+        SignInPINPasswordField.setForeground(ForegroundButton);
+        SignInPINPasswordField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        SignInPINPasswordField.setBounds(111,125,111,20);
+
+        LogInPINPasswordField = new JPasswordField();
+        LogInPINPasswordField.setBackground(BackgroundButton);
+        LogInPINPasswordField.setForeground(ForegroundButton);
+        LogInPINPasswordField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        LogInPINPasswordField.setBounds(111,105,111,20);
+
+        ForgotCardNumberPINTextField = new JPasswordField();
+        ForgotCardNumberPINTextField.setBackground(BackgroundButton);
+        ForgotCardNumberPINTextField.setForeground(ForegroundButton);
+        ForgotCardNumberPINTextField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        ForgotCardNumberPINTextField.setBounds(240,25,70,19);
+        //------------------\\
+           
+        //--frames/Panels content--\\
+        this.add(MainPageSignInButton);
+        this.add(MainPageLoginInButton);
+        this.add(MainPageForgotCardNumberButton);
+        this.add(MainPageInformationsButton);
+        this.add(MainPageWelcomeLabel);
+        this.add(MainPageAssistLabel);
+
+        ForgotCardNumberPanel.add(ForgotCardNumberLastNameTextField);
+        ForgotCardNumberPanel.add(ForgotCardNumberPINTextField);
+        ForgotCardNumberPanel.add(ForgotCardNumberPasswordField);
+        ForgotCardNumberPanel.add(ForgotCardNumberSubmitRequest);
+        ForgotCardNumberPanel.add(ForgotCardNumberCheckBox);
+        ForgotCardNumberPanel.add(ForgotCardNumberPINLabel);
+        ForgotCardNumberPanel.add(ForgotCardNumberReturnToMainPageButton);
+
+        SignInPanel.add(SignInFirstNameTextField);
+        SignInPanel.add(SignInLastNameTextField);
+        SignInPanel.add(SignInPINPasswordField);
+        SignInPanel.add(SignInPINLabel);
+        SignInPanel.add(SignInSubmitRequestButton);
+        SignInPanel.add(SignInReturnToMainPageButton);
+
         DeleteCardPanel.add(DeleteCardLabel);
+
+        LogInPanel.add(LogInCardNumberTextField);
+        LogInPanel.add(LogInLabel);
+        LogInPanel.add(LogInPINPasswordField);
+        LogInPanel.add(LogInSubmitRequestButton);
+        LogInPanel.add(LogInReturnToMainPageButton);
+
+        ForgotCardNumberFrame.add(ForgotCardNumberPanel);
+        SignInFrame.add(SignInPanel);  
         DeleteCardFrame.add(DeleteCardPanel);
-    }
+        LogInFrame.add(LogInPanel);
+        //-------------------------\\
 
-    public String insert(){
-
-        int count = 3;
-    
-        String pin;
-        String query = "";
-
-        do {
-            this.card = JOptionPane.showInputDialog(null, "Insert card number");
-
-            query = "SELECT CARDS.card_number FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";
-            
-        } while(!sqlConn.makeDMLQuery(query));
-
-        do {
-            if(count != 0) {
-                pin = JOptionPane.showInputDialog(null, "Give me your PIN");
-
-                query = "SELECT CARDS.PIN FROM CARDS WHERE CARDS.PIN =" + "'" + pin + "'" + "AND CARDS.card_number =" + "'" + this.card + "'";
-
-                if (!sqlConn.makeDMLQuery(query)) {
-
-                    count--;
-                    JOptionPane message2 = new JOptionPane();
-                    JOptionPane.showMessageDialog(message2, "Wrong pin! You have " + count + " tries left.");
-                }
-            }
-            else {
-            	
-                this.DeleteCardFrame.setVisible(true);
-                
-                query = "DELETE FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";
-                
-                sqlConn.makeDMLQuery(query);
-                
-                query = "";
-                
-                break;
-            }          
-            
-        } while (!sqlConn.makeDMLQuery(query));
-
-        
-        
-        if(sqlConn.makeDMLQuery(query)){
-            return this.card;
-        }
-        return "0";
+        this.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource().equals(button1)){
-
-            this.setVisible(false);
-            this.frame2.setVisible(true);
-        }
-        else if(e.getSource().equals(button2)){
+        if(e.getSource().equals(MainPageSignInButton)){
 
             this.setVisible(false);
 
-            String card = insert();
-
-            if(!card.equals("0")){
-            	
-            	@SuppressWarnings("unused")
-            	Card cardData = new Card(this.card);
-    	
-                @SuppressWarnings("unused")
-				GUI gui = new GUI(this.card);
-            }
+            this.SignInFrame.setVisible(true);
         }
-        else if(e.getSource().equals(button3)){
+        else if(e.getSource().equals(MainPageLoginInButton)){
 
-            System.out.println("mphka");
-            frame1.setVisible(true);
+            this.setVisible(false);
+
+            this.LogInFrame.setVisible(true);
+            this.LogInLabel.setVisible(false);
+            this.LogInPINPasswordField.setVisible(false);
+        }
+        else if(e.getSource().equals(MainPageForgotCardNumberButton)){
+
+            this.setVisible(false);
+            ForgotCardNumberFrame.setVisible(true);
             
         }
-        else if(e.getSource().equals(button4)){
+        else if(e.getSource().equals(MainPageInformationsButton)){
             //Contant bank
+
         }
-        else if(e.getSource().equals(button5)){
+        else if(e.getSource().equals(ForgotCardNumberSubmitRequest)){
 
             receivedData = new ArrayList<String>();
-            String query = "SELECT CARDS.card_number FROM CARDS WHERE CARDS.last_name =" + "'" + this.textField1.getText() + "'" + "AND CARDS.PIN =" + "'" + this.textField2.getText() + "'";
+
+            char[] receivedPassword = this.ForgotCardNumberPINTextField.getPassword();
+
+            String query = "SELECT CARDS.card_number FROM CARDS WHERE CARDS.last_name =" + "'" + this.ForgotCardNumberLastNameTextField.getText() + "'" + "AND CARDS.PIN =" + "'" + String.valueOf(receivedPassword) + "'";
 
             if(!sqlConn.makeDMLQuery(query)){
                 JOptionPane.showMessageDialog(null, "Something went wrong! Invalid lastname or PIN");
             }
             else{
                 receivedData.addAll(sqlConn.getQueryResults());
-                this.passwordField1.setText(receivedData.get(0));
+                this.ForgotCardNumberPasswordField.setText(receivedData.get(0));
             }
         }
-        else if(e.getSource().equals(button6)){
-
-            boolean flag = false;
+        else if(e.getSource().equals(SignInSubmitRequestButton)){
 
             CardGenerator cG = new CardGenerator();
-            String pin;
             
-            String firstName = this.textField3.getText();
-            String lastName = this.textField4.getText();
-            char[] receivedPassword = this.passwordField2.getPassword();
+            String firstName = this.SignInFirstNameTextField.getText();
+            String lastName = this.SignInLastNameTextField.getText();
+            char[] receivedPassword = this.SignInPINPasswordField.getPassword();
             
-            if(this.passwordField2.getPassword().length == 0 || firstName.contains(" ") || lastName.contains(" ")){
+
+            if(this.SignInPINPasswordField.getPassword().length == 0 || firstName.contains(" ") || lastName.contains(" ")){
 
                 JOptionPane.showMessageDialog(null, "Invalid Data! Fill up the fields correctly");
             }
             else{
 
-                pin = receivedPassword.toString();
+                String pin = String.valueOf(receivedPassword);
                 String cvv = cG.CVV();
                 this.card = cG.generate("4054", 16);
 
@@ -381,7 +428,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
                                                     + "'" + "," 
                                                     + "'" + expirationDate 
                                                     + "'" + "," 
-                                                    + "'" + pin 
+                                                    + "'" + pin
                                                     + "'" + "," 
                                                     + "'" + cvv 
                                                     + "'" + ")";
@@ -391,19 +438,83 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Your card has been successfully registered");
 
                 this.setVisible(true);
+                this.SignInFrame.setVisible(false);
             }
         }
-        else if(e.getSource().equals(button7)){
+        else if(e.getSource().equals(SignInReturnToMainPageButton) || e.getSource().equals(LogInReturnToMainPageButton) || e.getSource().equals(ForgotCardNumberReturnToMainPageButton)){
 
+            this.setVisible(true);
+
+            this.ForgotCardNumberFrame.setVisible(false);
+            this.SignInFrame.setVisible(false);
+            this.LogInFrame.setVisible(false);
         }
-        else if(e.getSource().equals(checkBox1)){
-            if(checkBox1.isSelected()){
-                this.passwordField1.setEchoChar((char)0);
+        else if(e.getSource().equals(ForgotCardNumberCheckBox)){
+            if(ForgotCardNumberCheckBox.isSelected()){
+                this.ForgotCardNumberPasswordField.setEchoChar((char)0);
             }
             else {
-                this.passwordField1.setEchoChar('*');
+                this.ForgotCardNumberPasswordField.setEchoChar('*');
+            }
+        }
+        else if(e.getSource().equals(LogInSubmitRequestButton)){
+
+            String pin;
+            String query = "";
+            
+            if(!this.LogInPINAppear){
+
+                this.card = this.LogInCardNumberTextField.getText();
+
+                query = "SELECT CARDS.card_number FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";
+                if(!sqlConn.makeDMLQuery(query)){
+                    JOptionPane.showMessageDialog(null, "Your Card Number is incorrect! Try again.");
+                }
+                else{
+                    this.LogInCardNumberTextField.setEditable(false);
+                    this.LogInLabel.setVisible(true);
+                    this.LogInPINPasswordField.setVisible(true);
+                    this.LogInPINAppear = true;
+                }
+            }
+            else{
+                
+                if(this.count != 0) {
+
+                    char[] receivedPassword = this.LogInPINPasswordField.getPassword();
+
+                    pin = String.valueOf(receivedPassword);
+    
+                    query = "SELECT CARDS.PIN FROM CARDS WHERE CARDS.PIN =" + "'" + pin + "'" + "AND CARDS.card_number =" + "'" + this.card + "'";
+    
+                    if (!sqlConn.makeDMLQuery(query)) {
+    
+                        count--;
+                        JOptionPane.showMessageDialog(null, "Wrong pin! You have " + count + " tries left.");
+                    }
+                    else{
+
+                        @SuppressWarnings("unused")
+                        Card cardData = new Card(this.card);
+                
+                        @SuppressWarnings("unused")
+                        GUI gui = new GUI(this.card);
+
+                        this.LogInFrame.setVisible(false);
+                    }
+                }
+
+                if(this.count == 0) {
+                    
+                    this.DeleteCardFrame.setVisible(true);
+                    
+                    query = "DELETE FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";
+                    
+                    sqlConn.makeDMLQuery(query);
+                    
+                    query = "";
+                }          
             }
         }
     }
-
 }

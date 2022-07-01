@@ -14,7 +14,7 @@ public class SQLiteConnection {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Windows 10\\Desktop\\Programming\\Projects\\Java-Projects\\BankSimulator\\Cards.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:BankSimulator\\Cards.db");
             conn.setAutoCommit(false);
 
             stmt = conn.createStatement();
@@ -25,7 +25,6 @@ public class SQLiteConnection {
 
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
-
                     for(int i=1; i<rs.getMetaData().getColumnCount() + 1; i++){
                         result = 1;
                         this.receivedData.add((String) rs.getObject(i));
