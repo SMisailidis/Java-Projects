@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 public class GUI extends JFrame implements ActionListener {
 
-
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<String> queryResults = new ArrayList<>();
