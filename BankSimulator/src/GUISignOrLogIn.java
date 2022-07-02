@@ -57,6 +57,8 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
     private JButton LogInSubmitRequestButton;
 
     private JCheckBox ForgotCardNumberCheckBox;
+    private JCheckBox SignInCheckBox;
+    private JCheckBox LogInCheckBox;
 
     private Color ForegroundLabel;
     private Color ForegroundButton;
@@ -116,7 +118,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         MainPagePanel = new JPanel();
         MainPagePanel.setBackground(new Color(77, 80, 79));
         this.setContentPane(MainPagePanel);
-        this.setSize(298,198);
+        this.setSize(300,200);
         this.setTitle("Welcome to our bank!");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -223,21 +225,21 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         SignInReturnToMainPageButton.setBackground(BackgroundButton);
         SignInReturnToMainPageButton.addActionListener(this);
         SignInReturnToMainPageButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        SignInReturnToMainPageButton.setBounds(5, 5, 35,35);
+        SignInReturnToMainPageButton.setBounds(5, 5, 37,37);
 
         LogInReturnToMainPageButton = new JButton(icon);
         LogInReturnToMainPageButton.setForeground(ForegroundButton);
         LogInReturnToMainPageButton.setBackground(BackgroundButton);
         LogInReturnToMainPageButton.addActionListener(this);
         LogInReturnToMainPageButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        LogInReturnToMainPageButton.setBounds(5, 5, 35,35);
+        LogInReturnToMainPageButton.setBounds(5, 5, 37,37);
         
         ForgotCardNumberReturnToMainPageButton = new JButton(icon);
         ForgotCardNumberReturnToMainPageButton.setForeground(ForegroundButton);
         ForgotCardNumberReturnToMainPageButton.setBackground(BackgroundButton);
         ForgotCardNumberReturnToMainPageButton.addActionListener(this);
         ForgotCardNumberReturnToMainPageButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-        ForgotCardNumberReturnToMainPageButton.setBounds(5, 5, 35,35);
+        ForgotCardNumberReturnToMainPageButton.setBounds(5, 5, 37,37);
 
         LogInSubmitRequestButton = new JButton("Submit");
         LogInSubmitRequestButton.setForeground(ForegroundButton);
@@ -254,6 +256,20 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         ForgotCardNumberCheckBox.addActionListener(this);
         ForgotCardNumberCheckBox.setBorder(BorderFactory.createLineBorder(ForegroundButton));
         ForgotCardNumberCheckBox.setBounds(108,140, 119, 35); 
+
+        SignInCheckBox = new JCheckBox();
+        SignInCheckBox.setBackground(BackgroundButton);
+        SignInCheckBox.setForeground(ForegroundButton);
+        SignInCheckBox.addActionListener(this);
+        SignInCheckBox.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        SignInCheckBox.setBounds(230,117, 119, 35); 
+
+        LogInCheckBox = new JCheckBox();
+        LogInCheckBox.setBackground(BackgroundButton);
+        LogInCheckBox.setForeground(ForegroundButton);
+        LogInCheckBox.addActionListener(this);
+        LogInCheckBox.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        LogInCheckBox.setBounds(230,98, 119, 35); 
         //--------------\\
         
         //--TextFields--\\
@@ -330,6 +346,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         SignInPanel.add(SignInPINLabel);
         SignInPanel.add(SignInSubmitRequestButton);
         SignInPanel.add(SignInReturnToMainPageButton);
+        SignInPanel.add(SignInCheckBox);
 
         DeleteCardPanel.add(DeleteCardLabel);
 
@@ -338,6 +355,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         LogInPanel.add(LogInPINPasswordField);
         LogInPanel.add(LogInSubmitRequestButton);
         LogInPanel.add(LogInReturnToMainPageButton);
+        LogInPanel.add(LogInCheckBox);
 
         ForgotCardNumberFrame.add(ForgotCardNumberPanel);
         SignInFrame.add(SignInPanel);  
@@ -363,6 +381,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
             this.LogInFrame.setVisible(true);
             this.LogInLabel.setVisible(false);
             this.LogInPINPasswordField.setVisible(false);
+            this.LogInCheckBox.setVisible(false);
         }
         else if(e.getSource().equals(MainPageForgotCardNumberButton)){
 
@@ -449,12 +468,16 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
             this.SignInFrame.setVisible(false);
             this.LogInFrame.setVisible(false);
         }
-        else if(e.getSource().equals(ForgotCardNumberCheckBox)){
-            if(ForgotCardNumberCheckBox.isSelected()){
+        else if(e.getSource().equals(ForgotCardNumberCheckBox) || e.getSource().equals(SignInCheckBox) || e.getSource().equals(LogInCheckBox)){
+            if(this.ForgotCardNumberCheckBox.isSelected() || this.SignInCheckBox.isSelected() || this.LogInCheckBox.isSelected()){
                 this.ForgotCardNumberPasswordField.setEchoChar((char)0);
+                this.LogInPINPasswordField.setEchoChar((char)0);
+                this.SignInPINPasswordField.setEchoChar((char)0);
             }
             else {
                 this.ForgotCardNumberPasswordField.setEchoChar('*');
+                this.LogInPINPasswordField.setEchoChar('*');
+                this.SignInPINPasswordField.setEchoChar('*');
             }
         }
         else if(e.getSource().equals(LogInSubmitRequestButton)){
@@ -474,6 +497,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
                     this.LogInCardNumberTextField.setEditable(false);
                     this.LogInLabel.setVisible(true);
                     this.LogInPINPasswordField.setVisible(true);
+                    this.LogInCheckBox.setVisible(true);;
                     this.LogInPINAppear = true;
                 }
             }
@@ -494,9 +518,6 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
                     }
                     else{
 
-                        @SuppressWarnings("unused")
-                        Card cardData = new Card(this.card);
-                
                         @SuppressWarnings("unused")
                         GUI gui = new GUI(this.card);
 

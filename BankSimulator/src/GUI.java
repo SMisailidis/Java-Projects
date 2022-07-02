@@ -3,8 +3,6 @@ import java.awt.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
 public class GUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -15,7 +13,6 @@ public class GUI extends JFrame implements ActionListener {
 
     private JFrame frame2;
 
-    private JLabel label2;
     private JLabel label5;
     private JLabel label4;
 
@@ -28,19 +25,15 @@ public class GUI extends JFrame implements ActionListener {
     private Color ForegroundButton;
     private Color BackgroundButton;
 
-    private String card;
-
     private Bank bank;
+
+    private Card card;
 
     public GUI(String card) {
 
-        this.card = card;
+        this.card = new Card(card);
         
-        this.bank = new Bank(this.card);
-
-        if(this.queryResults.isEmpty()){
-            RetrieveCardData();
-        }
+        //this.bank = new Bank(card);
 
         ForegroundLabel = new Color(43, 249, 194);
         ForegroundButton = new Color(43, 249, 194);
@@ -50,9 +43,8 @@ public class GUI extends JFrame implements ActionListener {
 
         panel3 = new JPanel();
 
-        label2 = new JLabel("Press \"Continue\"");
         label4 = new JLabel("------------------------(Card functions)------------------------");
-        label5 = new JLabel("Welcome Back " + this.queryResults.get(1));
+        label5 = new JLabel("Welcome Back " + this.card.getCardData().get(1));
         
         button5 = new JButton("Deposit");
         button5.setBorder(BorderFactory.createLineBorder(ForegroundButton));
@@ -79,9 +71,6 @@ public class GUI extends JFrame implements ActionListener {
         label5.setBounds(75,15,260,20);
         label5.setForeground(ForegroundLabel);
         
-        label2.setBounds(95,10,300,100);
-        label2.setForeground(ForegroundLabel);
-        
         label4.setForeground(ForegroundLabel);
         label4.setBounds(0,30,300,50);
 
@@ -105,7 +94,6 @@ public class GUI extends JFrame implements ActionListener {
         button8.setBounds(183,130,100,30);
         button8.addActionListener(this);
 
-        
         panel3.add(label5);
         panel3.add(label4);
         panel3.add(button5);
@@ -113,17 +101,6 @@ public class GUI extends JFrame implements ActionListener {
         panel3.add(button7);
         panel3.add(button8);
 
-    }
-
-    public void RetrieveCardData() {
-
-        SQLiteConnection sqlConn = new SQLiteConnection();
-
-        String query = "SELECT * FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";
-        
-        sqlConn.makeDMLQuery(query);
-
-        this.queryResults.addAll(sqlConn.getQueryResults());
     }
 
     public void actionPerformed(ActionEvent e) {
