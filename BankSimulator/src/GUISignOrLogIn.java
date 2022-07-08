@@ -78,7 +78,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         BackgroundButton = new Color(77, 80, 79);
         //----------\\
 
-        icon = new ImageIcon("BankSimulator\\Home.png");
+        icon = new ImageIcon("Home.png");
 
         //--Frames--\\
         ForgotCardNumberFrame = new JFrame();

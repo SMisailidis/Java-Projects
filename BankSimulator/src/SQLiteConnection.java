@@ -14,7 +14,7 @@ public class SQLiteConnection {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            conn = DriverManager.getConnection("jdbc:sqlite:BankSimulator\\Cards.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:Cards.db");
             conn.setAutoCommit(false);
 
             stmt = conn.createStatement();
