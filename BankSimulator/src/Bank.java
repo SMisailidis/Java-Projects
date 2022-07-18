@@ -1,44 +1,40 @@
 
 public class Bank {
 
-    protected int balance;
-    protected int BankBalance;
+    private int balance;
+    private int BankBalance;
+    private SQLiteConnection sqlConn;
+    private Card card;
 
-    public Bank(String card) {
+    public Bank(Card card) {
 
-        this.balance = 30; //my wallet balance
-        this.BankBalance = 1000; //my bank balance
+        this.sqlConn = new SQLiteConnection();
+        this.card = card;
+
+        this.balance = Integer.parseInt(card.getBankAccountData().get(0)); //my wallet balance
+        this.BankBalance = Integer.parseInt(card.getBankAccountData().get(1));; //my bank balance
     }
 
-    public void Deposit(int deposit) {
+    public boolean Deposit(int deposit) {
+
+        String query;
 
         this.BankBalance += deposit;
-        setBalance(deposit, false);
+        this.balance += deposit;
+
+        query = "UPDATE BANK SET BankMoney =" + '"' + this.BankBalance + '"' + ", CustomerBankAccount =" + '"' + this.balance + '"' + " WHERE BANK.CustomerCardNumber =" + '"' + this.card.getCardData().get(0) + '"';
+        
+        System.out.println(query);
+        return (sqlConn.makeDMLQuery(query));
     }
 
     public void Withdrawal(int withdrawal) {
 
         this.BankBalance -= withdrawal;
-        setBalance(withdrawal, true);
-
     }
 
     public int getBalance() {
         return this.balance;
-    }
-
-    public void setBalance(int money, boolean flag) {
-
-        if(!flag) {
-            this.balance -= money;
-        }
-        else {
-            if (this.BankBalance - money > 0) {
-                this.balance += money;
-            }
-
-        }
-
     }
 
     public int getBankBalance() {

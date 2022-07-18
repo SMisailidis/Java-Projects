@@ -5,21 +5,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class GUI extends JFrame implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
-
 	private ArrayList<String> queryResults = new ArrayList<>();
 
-    private JPanel panel3;
+    private ImageIcon icon; // Image icon
 
-    private JFrame frame2;
+    private JFrame DepositPageBankFrame;
+    private JFrame WithdrawalPageBankFrame;
+    private JFrame BalancePageBankFrame;
+    private JFrame ContactPageBankFrame;
 
-    private JLabel label5;
-    private JLabel label4;
+    private JPanel MainPageBankPanel;
+    private JPanel DepositPageBankPanel;
+    private JPanel WithdrawalPageBankPanel;
+    private JPanel BalancePageBankPanel;
+    private JPanel ContactPageBankPanel;
 
-    private JButton button5;
-    private JButton button6;
-    private JButton button7;
-    private JButton button8;
+    private JLabel MainPageBankWelcomeLabel;
+    private JLabel MainPageBankFunctionsLabel;
+
+    private JButton MainPageBankDepositButton;
+    private JButton MainPageBankWithdrawalButton;
+    private JButton MainPageBankBalanceButton;
+    private JButton MainPageBankContactButton;
+    private JButton DepositPageBankSubmitButton;
+    private JButton DepositPageBankHomeButton;
+    private JButton WithdrawalPageBankHomeButton;
+    private JButton BalancePageBankHomeButton;    
+    private JButton ContactPageBankHomeButton;
+
+    private JTextField DepositPageBankTextField;
+    private JTextPane DepositPageBankPrivacyTextPane;
 
     private Color ForegroundLabel;
     private Color ForegroundButton;
@@ -33,120 +48,239 @@ public class GUI extends JFrame implements ActionListener {
 
         this.card = new Card(card);
         
-        //this.bank = new Bank(card);
+        this.bank = new Bank(this.card);
 
+        //--Colors--\\
         ForegroundLabel = new Color(43, 249, 194);
         ForegroundButton = new Color(43, 249, 194);
         BackgroundButton = new Color(77, 80, 79);
+        //----------\\
 
-        frame2 = new JFrame();
+        //--Icons--\\
+        icon = new ImageIcon("Home.png");
+        //---------\\
 
-        panel3 = new JPanel();
+        //--Frames--\\
+        DepositPageBankFrame = new JFrame();
+        DepositPageBankFrame.setTitle("Deposit frame");
+        DepositPageBankFrame.setSize(350,200);
+        DepositPageBankFrame.setLayout(null);
+        DepositPageBankFrame.setLocationRelativeTo(null);
+        DepositPageBankFrame.setResizable(false);
+        DepositPageBankFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        label4 = new JLabel("------------------------(Card functions)------------------------");
-        label5 = new JLabel("Welcome Back " + this.card.getCardData().get(1));
+        WithdrawalPageBankFrame = new JFrame();
+        WithdrawalPageBankFrame.setTitle("Withdrawal frame");
+        WithdrawalPageBankFrame.setSize(350,220);
+        WithdrawalPageBankFrame.setLayout(null);
+        WithdrawalPageBankFrame.setLocationRelativeTo(null);
+        WithdrawalPageBankFrame.setResizable(false);
+        WithdrawalPageBankFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        BalancePageBankFrame = new JFrame();
+        BalancePageBankFrame.setTitle("Balance frame");
+        BalancePageBankFrame.setSize(350,220);
+        BalancePageBankFrame.setLayout(null);
+        BalancePageBankFrame.setLocationRelativeTo(null);
+        BalancePageBankFrame.setResizable(false);
+        BalancePageBankFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ContactPageBankFrame = new JFrame();
+        ContactPageBankFrame.setTitle("Contact frame");
+        ContactPageBankFrame.setSize(350,220);
+        ContactPageBankFrame.setLayout(null);
+        ContactPageBankFrame.setLocationRelativeTo(null);
+        ContactPageBankFrame.setResizable(false);
+        ContactPageBankFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //----------\\
+
+        //--Panels--\\
+        MainPageBankPanel = new JPanel();
+        MainPageBankPanel.setBackground(new Color(77, 80, 79));
+        this.setContentPane(MainPageBankPanel);
+        this.setSize(300,200);
+        this.setTitle("Welcome to our bank!");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setLayout(null);
+
+        DepositPageBankPanel = new JPanel();
+        DepositPageBankPanel.setBackground(new Color(77, 80, 79));
+        DepositPageBankPanel.setSize(350,220);
+        DepositPageBankPanel.setLayout(null);
+
+        WithdrawalPageBankPanel = new JPanel();
+        WithdrawalPageBankPanel.setBackground(new Color(77, 80, 79));
+        WithdrawalPageBankPanel.setSize(350,220);
+        WithdrawalPageBankPanel.setLayout(null);
+
+        BalancePageBankPanel = new JPanel();
+        BalancePageBankPanel.setBackground(new Color(77, 80, 79));
+        BalancePageBankPanel.setSize(350,220);
+        BalancePageBankPanel.setLayout(null);
+
+        ContactPageBankPanel = new JPanel();
+        ContactPageBankPanel.setBackground(new Color(77, 80, 79));
+        ContactPageBankPanel.setSize(350,220);
+        ContactPageBankPanel.setLayout(null);
+        //----------\\
         
-        button5 = new JButton("Deposit");
-        button5.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        //--Labels--\\
+        MainPageBankFunctionsLabel = new JLabel("------------------------(Card functions)------------------------");
+        MainPageBankFunctionsLabel.setForeground(ForegroundLabel);
+        MainPageBankFunctionsLabel.setBackground(BackgroundButton);
+        MainPageBankFunctionsLabel.setBounds(0,30,300,50);
 
-        button6 = new JButton("Withdrawal");
-        button6.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageBankWelcomeLabel = new JLabel("Welcome Back " + this.card.getCardData().get(1));
+        MainPageBankWelcomeLabel.setForeground(ForegroundLabel);
+        MainPageBankWelcomeLabel.setBounds(75,15,260,20);
+        //----------\\
 
-        button7= new JButton("Balance");
-        button7.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-
-        button8= new JButton("Contant Bank");
-        button8.setBorder(BorderFactory.createLineBorder(ForegroundButton));
-
-        frame2.setSize(300,200);
-        frame2.add(panel3);
-        frame2.setResizable(false);
-        frame2.setLocationRelativeTo(null);
-        frame2.setVisible(true);
-
-        panel3.setSize(300,200);
-        panel3.setLayout(null);
-        panel3.setBackground(new Color(77, 80, 79));
+        //--Buttons--\\
+        MainPageBankDepositButton = new JButton("Deposit");
+        MainPageBankDepositButton.setForeground(ForegroundButton);
+        MainPageBankDepositButton.setBackground(BackgroundButton);
+        MainPageBankDepositButton.addActionListener(this);
+        MainPageBankDepositButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageBankDepositButton.setBounds(1,80,100,30);
         
-        label5.setBounds(75,15,260,20);
-        label5.setForeground(ForegroundLabel);
+        MainPageBankWithdrawalButton = new JButton("Withdrawal");
+        MainPageBankWithdrawalButton.setForeground(ForegroundButton);
+        MainPageBankWithdrawalButton.setBackground(BackgroundButton);
+        MainPageBankWithdrawalButton.addActionListener(this);
+        MainPageBankWithdrawalButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageBankWithdrawalButton.setBounds(183,80,100,30);
+ 
+        MainPageBankBalanceButton= new JButton("Balance");
+        MainPageBankBalanceButton.setForeground(ForegroundButton);
+        MainPageBankBalanceButton.setBackground(BackgroundButton);
+        MainPageBankBalanceButton.addActionListener(this);
+        MainPageBankBalanceButton.setBorder(BorderFactory.createLineBorder(ForegroundButton)); 
+        MainPageBankBalanceButton.setBounds(1,130,100,30);
         
-        label4.setForeground(ForegroundLabel);
-        label4.setBounds(0,30,300,50);
+        MainPageBankContactButton= new JButton("Contact Bank");
+        MainPageBankContactButton.setForeground(ForegroundButton);
+        MainPageBankContactButton.setBackground(BackgroundButton);
+        MainPageBankContactButton.addActionListener(this);
+        MainPageBankContactButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        MainPageBankContactButton.setBounds(183,130,100,30);
 
-        button5.setForeground(ForegroundButton);
-        button5.setBackground(BackgroundButton);
-        button5.setBounds(1,80,100,30);
-        button5.addActionListener(this);
+        DepositPageBankSubmitButton = new JButton("Submit");
+        DepositPageBankSubmitButton.setForeground(ForegroundButton);
+        DepositPageBankSubmitButton.setBackground(BackgroundButton);
+        DepositPageBankSubmitButton.addActionListener(this);
+        DepositPageBankSubmitButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        DepositPageBankSubmitButton.setBounds(128, 110, 80,30);
 
-        button6.setForeground(ForegroundButton);
-        button6.setBackground(BackgroundButton);
-        button6.setBounds(183,80,100,30);
-        button6.addActionListener(this);
+        DepositPageBankHomeButton = new JButton(icon);
+        DepositPageBankHomeButton.setForeground(ForegroundButton);
+        DepositPageBankHomeButton.setBackground(BackgroundButton);
+        DepositPageBankHomeButton.addActionListener(this);
+        DepositPageBankHomeButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        DepositPageBankHomeButton.setBounds(5, 5, 37,37);
 
-        button7.setForeground(ForegroundButton);
-        button7.setBackground(BackgroundButton);
-        button7.setBounds(1,130,100,30);
-        button7.addActionListener(this);
+        WithdrawalPageBankHomeButton = new JButton(icon);
+        WithdrawalPageBankHomeButton.setForeground(ForegroundButton);
+        WithdrawalPageBankHomeButton.setBackground(BackgroundButton);
+        WithdrawalPageBankHomeButton.addActionListener(this);
+        WithdrawalPageBankHomeButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        WithdrawalPageBankHomeButton.setBounds(5, 5, 37,37);
 
-        button8.setForeground(ForegroundButton);
-        button8.setBackground(BackgroundButton);
-        button8.setBounds(183,130,100,30);
-        button8.addActionListener(this);
+        BalancePageBankHomeButton = new JButton(icon);
+        BalancePageBankHomeButton.setForeground(ForegroundButton);
+        BalancePageBankHomeButton.setBackground(BackgroundButton);
+        BalancePageBankHomeButton.addActionListener(this);
+        BalancePageBankHomeButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        BalancePageBankHomeButton.setBounds(5, 5, 37,37);
 
-        panel3.add(label5);
-        panel3.add(label4);
-        panel3.add(button5);
-        panel3.add(button6);
-        panel3.add(button7);
-        panel3.add(button8);
+        ContactPageBankHomeButton = new JButton(icon);
+        ContactPageBankHomeButton.setForeground(ForegroundButton);
+        ContactPageBankHomeButton.setBackground(BackgroundButton);
+        ContactPageBankHomeButton.addActionListener(this);
+        ContactPageBankHomeButton.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        ContactPageBankHomeButton.setBounds(5, 5, 37,37);
+        //-----------\\
 
+        //--TextFields--\\
+        DepositPageBankTextField = new JTextField("How much do you want to deposit?");
+        DepositPageBankTextField.setBackground(BackgroundButton);
+        DepositPageBankTextField.setForeground(ForegroundButton);
+        DepositPageBankTextField.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        DepositPageBankTextField.setBounds(75,69,185,19);
+
+        DepositPageBankPrivacyTextPane = new JTextPane();
+        DepositPageBankPrivacyTextPane.setContentType("text/html");
+        DepositPageBankPrivacyTextPane.setText("<html><body><p style='color:rgb(43, 249, 194);font-size:7px;position:relative;margin-top:1rem;'><strong style='color:red;'>DISCLAIMER!</strong>Our bank provides all protection and security during the deposit of money in your account.<p style='color:rgb(43, 249, 194);font-size:7px;position:absolute;margin-left:130px;margin-top:0.5rem;'>©2022 MISA Privacy Policy</p></p></body></html>");
+        DepositPageBankPrivacyTextPane.setBackground(BackgroundButton);
+        DepositPageBankPrivacyTextPane.setForeground(ForegroundButton);
+        DepositPageBankPrivacyTextPane.setBorder(BorderFactory.createLineBorder(ForegroundButton));
+        DepositPageBankPrivacyTextPane.setBounds(50,5,280,37);
+        //--------------\\
+
+        //--frames/Panels content--\\
+        this.add(MainPageBankWelcomeLabel);
+        this.add(MainPageBankFunctionsLabel);
+        this.add(MainPageBankDepositButton);
+        this.add(MainPageBankWithdrawalButton);
+        this.add(MainPageBankBalanceButton);
+        this.add(MainPageBankContactButton);
+
+        DepositPageBankPanel.add(DepositPageBankTextField);
+        DepositPageBankPanel.add(DepositPageBankPrivacyTextPane);
+        DepositPageBankPanel.add(DepositPageBankHomeButton);
+        DepositPageBankPanel.add(DepositPageBankSubmitButton);
+        WithdrawalPageBankPanel.add(WithdrawalPageBankHomeButton);
+        BalancePageBankPanel.add(BalancePageBankHomeButton);
+        ContactPageBankPanel.add(ContactPageBankHomeButton);
+
+
+        DepositPageBankFrame.add(DepositPageBankPanel);
+        WithdrawalPageBankFrame.add(WithdrawalPageBankPanel);
+        BalancePageBankFrame.add(BalancePageBankPanel);
+        ContactPageBankFrame.add(ContactPageBankPanel);
+        //-------------------------\\
+
+        this.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
 
     	
-    	if (e.getSource().equals(button5)) {
+    	if (e.getSource().equals(MainPageBankDepositButton)) {
 
-            String deposit;
-
-            deposit = JOptionPane.showInputDialog(null, "How much do you want to deposit?");
-
-            if(bank.getBalance() < Integer.parseInt(deposit)) {
-
-                JOptionPane.showMessageDialog(null, "Your balance was " + bank.getBalance() + ", we cant make the deposit.");
-
-            }
-            else {
-
-                bank.Deposit(Integer.parseInt(deposit));
-
-                JOptionPane.showMessageDialog(null, "Your balance after the deposit is: " + bank.getBalance() + " and your bank balance: " + bank.getBankBalance() + ".");
-            }
+            this.DepositPageBankFrame.setVisible(true);
         }
-        else if (e.getSource().equals(button6)) {
+        else if (e.getSource().equals(MainPageBankWithdrawalButton)) {
 
-            String withdrawal;
+            this.WithdrawalPageBankFrame.setVisible(true);
+            // String withdrawal;
 
-            withdrawal = JOptionPane.showInputDialog(null, "How much do you want to withdraw?");
+            // withdrawal = JOptionPane.showInputDialog(null, "How much do you want to withdraw?");
 
 
-            if(bank.getBankBalance() > Integer.parseInt(withdrawal)) {
+            // if(bank.getBankBalance() > Integer.parseInt(withdrawal)) {
 
-                bank.Withdrawal(Integer.parseInt(withdrawal));
+            //     bank.Withdrawal(Integer.parseInt(withdrawal));
 
-                JOptionPane.showMessageDialog(null, "Your balance after the withdraw is: " + bank.getBalance() + ".");
-            }
-            else {
+            //     JOptionPane.showMessageDialog(null, "Your balance after the withdraw is: " + bank.getBalance() + ".");
+            // }
+            // else {
 
-                JOptionPane.showMessageDialog(null, "Bank doesn't have enough money to make the withdrawal.");
-            }
+            //     JOptionPane.showMessageDialog(null, "Bank doesn't have enough money to make the withdrawal.");
+            // }
         }
-        else if (e.getSource().equals(button7)){
-            JOptionPane.showMessageDialog(null, "Your balance is: " + bank.getBalance() + ".");
+        else if (e.getSource().equals(MainPageBankBalanceButton)){
+            this.BalancePageBankFrame.setVisible(true);
+            // JOptionPane.showMessageDialog(null, "Your balance is: " + bank.getBalance() + ".");
         }
-        else if (e.getSource().equals(button8)){
-            JOptionPane.showMessageDialog(null, "Website is currently offline.");
+        else if (e.getSource().equals(MainPageBankContactButton)){
+            this.ContactPageBankFrame.setVisible(true);
+            // JOptionPane.showMessageDialog(null, "Website is currently offline.");
+        }
+        else if (e.getSource().equals(DepositPageBankSubmitButton)){
+            String deposit = DepositPageBankTextField.getText();
+            System.out.println(this.bank.Deposit(Integer.parseInt(deposit)));
         }
     }
 }

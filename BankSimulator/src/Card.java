@@ -17,8 +17,8 @@ public class Card {
     	String query = "SELECT * FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";	
 		arrayListFill(query, this.cardData);
 
-		// query = "SELECT BANK.CustomerBankAccount FROM BANK WHERE BANK.CustomerCardNumber = " + "'" + this.card + "'";
-		// arrayListFill(query, this.bankAccountData);
+		query = "SELECT BANK.CustomerBankAccount, BANK.BankMoney FROM BANK WHERE BANK.CustomerCardNumber =" + "'" + this.card + "'";	
+		arrayListFill(query, this.bankAccountData);
     }
 
 	public void arrayListFill(String query,ArrayList<String> arrayList){

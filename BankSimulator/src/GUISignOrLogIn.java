@@ -9,15 +9,15 @@ import java.awt.event.ActionListener;
 public class GUISignOrLogIn extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	
-    private  JFrame DeleteCardFrame;
-    private JFrame ForgotCardNumberFrame;
-    private JFrame SignInFrame;
-    private JFrame LogInFrame;
 
     private String card;
     private Boolean LogInPINAppear = false;
     private int count = 3;
+	
+    private JFrame DeleteCardFrame;
+    private JFrame ForgotCardNumberFrame;
+    private JFrame SignInFrame;
+    private JFrame LogInFrame;
 
     private ImageIcon icon; // Image icon
 
@@ -34,7 +34,6 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
     private JLabel DeleteCardLabel;
     private JLabel ForgotCardNumberPINLabel;
 
-    
     private JTextField ForgotCardNumberLastNameTextField;
     private JTextField SignInFirstNameTextField;
     private JTextField SignInLastNameTextField;
@@ -78,7 +77,9 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         BackgroundButton = new Color(77, 80, 79);
         //----------\\
 
+        //--Icons--\\
         icon = new ImageIcon("Home.png");
+        //---------\\
 
         //--Frames--\\
         ForgotCardNumberFrame = new JFrame();
@@ -178,7 +179,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         //----------\\
 
         //--Buttons--\\
-        MainPageSignInButton = new JButton("Sign in");
+        MainPageSignInButton = new JButton("Sign up");
         MainPageSignInButton.setForeground(ForegroundButton);
         MainPageSignInButton.setBackground(BackgroundButton);
         MainPageSignInButton.addActionListener(this);
