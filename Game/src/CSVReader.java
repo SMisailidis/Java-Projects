@@ -9,8 +9,8 @@ public class CSVReader {
 	protected ArrayList<String> names = new ArrayList<>();
 	protected ArrayList<int[]> stats = new ArrayList<>();
 	
-	protected String file;    //= "src\\thebludgers\\Tree.csv"; //Τοποθεσία του αρχείου που θέλουμε να αναγνωστεί
-    protected String line = ""; //Αποθηκεύει την γραμμή του αρχείου που βρισκόμαστε
+	protected String file;    //= "src\\thebludgers\\Tree.csv"; //οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½
+    protected String line = ""; //οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½
         
     public CSVReader(String fName) {
     
@@ -31,6 +31,13 @@ public class CSVReader {
             	}
             	
             	stats.add(stat);
+                
+                
+                for (int[] r : stats) {
+                    for (int c : r) {
+                        System.out.println(c);
+                    }
+                }
             }
             read.close();
         }

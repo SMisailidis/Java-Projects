@@ -1,17 +1,19 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.TreeMap;
 import javax.swing.*;
 
 public class HeroSelectGUI extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+
+	protected ArrayList<String[]> resultsArrayList;
+	protected String receivedData;
+	protected String query;
+	protected String text;
 	
 	protected String number; // Number of players
 	protected int j=2; // Int for help
@@ -34,7 +36,12 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 	protected ImageIcon logo; // Mini icon in the frame
 
 	public HeroSelectGUI() {
-		
+
+		this.resultsArrayList = new ArrayList<String[]>();
+		this.receivedData = "";
+		this.query = "";
+		this.text = "";
+
 		String message = null;
 		this.number = null;
 		this.selectedHeroes = new ArrayList<Heroes>();
@@ -69,7 +76,19 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 		}
 		
 		dropDownList.addActionListener(this); // allows dropDownList to have actions
-		String text = txtReader((String)(dropDownList.getSelectedItem())); // Gets the first info from the .txt
+		this.query = "SELECT HEROES.description FROM HEROES WHERE name= 'Ant-Man'";
+
+		if(Game.sql.makeDMLQuery(this.query)){
+			
+			this.resultsArrayList.clear();
+
+			this.receivedData = Game.sql.getQueryResults(); // Gets the first info from the .txt
+
+			this.resultsArrayList = Game.spliterator(this.receivedData);
+			
+			this.text = this.resultsArrayList.get(0)[0];
+		}
+		
 		//-----------------------\\
 		
 		//----------imageLabel----------\\
@@ -139,13 +158,23 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 			imageLabel.setIcon(icon);
 			frame.add(imageLabel);
 			
-			String text = txtReader(dropDownList.getSelectedItem().toString());
-			infoTextArea.setText(text);
+			this.query = "SELECT HEROES.description FROM HEROES WHERE name=" + '"' + this.dropDownList.getSelectedItem() + '"';
+
+			if(Game.sql.makeDMLQuery(this.query)){
+
+				this.resultsArrayList.clear();
+
+				this.receivedData = Game.sql.getQueryResults();
+
+				this.resultsArrayList = Game.spliterator(this.receivedData);
+
+				infoTextArea.setText(this.resultsArrayList.get(0)[0]);
+			}
 		}
 		
 		if(e.getSource()==selectButton) {
 			
-			this.selectedHeroes.add(Game.select(dropDownList.getSelectedItem().toString()));
+			Game.select(dropDownList.getSelectedItem().toString());
 			dropDownList.removeItem(dropDownList.getSelectedItem());
 			
 			if(this.j <= Integer.parseInt(this.number)) {
@@ -153,7 +182,7 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 				j++;
 			}
 			else {
-				BoardGUI board = new BoardGUI();
+				//BoardGUI board = new BoardGUI();
 				frame.setVisible(false);
 			}
 
@@ -161,36 +190,22 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 	}
 	
 	public void treeFill() {
-		
-		CSVReader csv = new CSVReader("src\\Heroes.csv");
-		
-		for(String i: csv.names) {
-			String location = "src\\Heroes\\" + i + ".png";
-			this.imgHero.put(i, location);
+
+		this.query = "SELECT HEROES.name FROM HEROES";
+
+		if(Game.sql.makeDMLQuery(this.query)){
+
+			this.resultsArrayList.clear();
+
+			this.receivedData = Game.sql.getQueryResults();
+
+			this.resultsArrayList = Game.spliterator(this.receivedData);
+
+			for (String[] r : this.resultsArrayList) {
+
+				String location = "src\\Heroes\\" + r[0] + ".png";
+				this.imgHero.put(r[0], location);
+			}
 		}
-		
-	}
-	
-	public String txtReader(String name) {
-		
-		String file = "src\\Texts\\" + name + ".txt";
-		String text ="";
-		File txt = new File(file);
-               
-        try {
-        	Scanner scan = new Scanner(txt); 
-        	
-        	while(scan.hasNextLine()){
-                text += scan.nextLine() + "\n";
-            }
-        	
-        	scan.close();
-        }
-        catch(FileNotFoundException e) {
-        	e.printStackTrace();
-        } 
-        
-        
-        return text;
 	}
 }

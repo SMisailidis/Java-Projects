@@ -1,9 +1,0 @@
-Wanda was infused with the power of the Mind Stone and the Scarlet Witch.
-Through lost and grief she became one of Earth's most powerful defenders.
-
-Strength: 40
-Stamina: 60
-Evasion: 70
-Defense: 65
-Accuracy: 65
-Instinct: 80

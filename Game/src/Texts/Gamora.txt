@@ -1,9 +1,0 @@
-The last survivor of her race, Gamora joined the Guardians of the Galaxy.
-Now she is one of the defenders of this Universe.
-
-Strength: 70
-Stamina: 65
-Evasion: 80
-Defense: 55
-Accuracy: 45
-Instinct: 65

@@ -1,53 +1,41 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Game {
 
-	public static void main(String[] args) {
-		
-		//Scanner input = new Scanner(System.in);
-		//CSVReader csv = new CSVReader("src\\Heroes.csv");
-		//Heroes player = null;
-		//String name;
-		
-		HeroSelectGUI w = new HeroSelectGUI();
-		
-		/*
-		do {
-			System.out.println("Choose your Hero: \n" + csv.names);
-			name = input.nextLine();
-		}while(!csv.names.contains(name));
-		
-		input.close();
-		player = select(name);
+	public static SQLiteConnection sql;
+	protected static ArrayList<Heroes> selectedHeroes = new ArrayList<>();
 
-		if(player instanceof GOTG) {
-			//Fights ads = new Fights((GOTG)player);
-			//Fights asds = new Fights(player);
-		}
-		else {
-			//Fights asds = new Fights(player);
-		} */
-		
+	public static void main(String[] args) {
+
+		sql = new SQLiteConnection("Characters.db");
+
+		HeroSelectGUI w = new HeroSelectGUI();
 	}
 	
-	public static Heroes select(String name) {
-		Heroes hero = null;
-		
-		switch(name) {		
-			case "Iron Man": IronMan im = new IronMan(); hero = im; break;
-			case "Spider-Man": SpiderMan sp = new SpiderMan(); hero = sp; break;
-			case "Captain America": CaptainAmerica ca = new CaptainAmerica(); hero = ca; break;
-			case "Thor": Thor t = new Thor(); hero = t; break;
-			case "Dr Strange": DoctorStrange ds = new DoctorStrange(); hero = ds; break;
-			case "Starlord": StarLord sl = new StarLord(); hero = sl; break;
-			case "Gamora": Gamora g = new Gamora(); hero = g; break;
-			case "Rocket Raccoon": RocketRaccoon rr = new RocketRaccoon(); hero = rr; break;
-			case "Drax": Drax d = new Drax(); hero = d; break;
-			case "Groot": Groot gr = new Groot(); hero = gr; break;
-			case "Ant-Man": AntMan am = new AntMan(); hero = am; break;
-			case "Scarlet Witch": ScarletWitch sw = new ScarletWitch(); hero = sw; break;
-			case "Black Panther": BlackPanther bp = new BlackPanther(); hero = bp; break;
+	public static void select(String name) {
+
+		ArrayList<String[]> results = new ArrayList<String[]>();
+		String query = "SELECT * FROM HEROES WHERE name=" + '"' + name + '"';
+		String receivedData = "";
+
+		if(sql.makeDMLQuery(query)){
+			receivedData = sql.getQueryResults();
+			results = spliterator(receivedData);
 		}
-		return hero;
+
+		selectedHeroes.add(new Heroes(results));
+	}
+
+	public static ArrayList<String[]> spliterator(String receivedData){
+
+		ArrayList<String[]> results = new ArrayList<String[]>();
+
+		String[] resultArray = receivedData.split("/");
+
+		for (String r : resultArray) {
+			results.add(r.split("@"));
+		}
+
+		return results;
 	}
 }
