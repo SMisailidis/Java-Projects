@@ -1,9 +1,14 @@
 import java.sql.*;
-import java.util.ArrayList;
 
 public class SQLiteConnection {
 
-    private ArrayList<String> receivedData = new ArrayList<String>();
+    private String url;
+
+    public SQLiteConnection(String url){
+        this.url = url;
+    }
+
+    private String receivedData;
 
     public boolean makeDMLQuery(String query) {
 
@@ -14,21 +19,22 @@ public class SQLiteConnection {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            conn = DriverManager.getConnection("jdbc:sqlite:Cards.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:" + this.url);
             conn.setAutoCommit(false);
 
             stmt = conn.createStatement();
 
             if(query.contains("SELECT")){
        
-                this.receivedData.clear();
+                this.receivedData = "";
 
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     for(int i=1; i<rs.getMetaData().getColumnCount() + 1; i++){
                         result = 1;
-                        this.receivedData.add((String) rs.getObject(i));
+                        this.receivedData += (String) rs.getObject(i) + "@";
                     }
+                    this.receivedData += "/";
                 }
             }
             else{
@@ -36,6 +42,7 @@ public class SQLiteConnection {
             }
 
             stmt.close();
+
             conn.commit();
             conn.close();
 
@@ -51,7 +58,7 @@ public class SQLiteConnection {
         return false;
     }
 
-    public ArrayList<String> getQueryResults(){
+    public String getQueryResults(){
 
         return this.receivedData;
     }

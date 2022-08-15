@@ -3,16 +3,14 @@ public class Bank {
 
     private int balance;
     private int BankBalance;
-    private SQLiteConnection sqlConn;
     private Card card;
 
     public Bank(Card card) {
 
-        this.sqlConn = new SQLiteConnection();
         this.card = card;
 
-        this.balance = Integer.parseInt(card.getBankAccountData().get(0)); //my wallet balance
-        this.BankBalance = Integer.parseInt(card.getBankAccountData().get(1));; //my bank balance
+        this.balance = Integer.parseInt(this.card.getBankAccountData().get(0)[0]); //my wallet balance
+        this.BankBalance = Integer.parseInt(this.card.getBankAccountData().get(0)[1]);; //my bank balance
     }
 
     public boolean Deposit(int deposit) {
@@ -22,10 +20,10 @@ public class Bank {
         this.BankBalance += deposit;
         this.balance += deposit;
 
-        query = "UPDATE BANK SET BankMoney =" + '"' + this.BankBalance + '"' + ", CustomerBankAccount =" + '"' + this.balance + '"' + " WHERE BANK.CustomerCardNumber =" + '"' + this.card.getCardData().get(0) + '"';
+        query = "UPDATE BANK SET BankMoney =" + '"' + this.BankBalance + '"' + ", CustomerBankAccount =" + '"' + this.balance + '"' + " WHERE BANK.CustomerCardNumber =" + '"' + this.card.getCardData().get(0)[0] + '"';
         
         System.out.println(query);
-        return (sqlConn.makeDMLQuery(query));
+        return (Main.sql.makeDMLQuery(query));
     }
 
     public void Withdrawal(int withdrawal) {

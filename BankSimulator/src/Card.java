@@ -1,46 +1,48 @@
 import java.util.*;
+
 public class Card {
 
     private String card;
-    private ArrayList<String> cardData;
-	private ArrayList<String> bankAccountData;
-	private SQLiteConnection sqlConn;
+    private ArrayList<String[]> cardData;
+	private ArrayList<String[]> bankAccountData;
 
 	public Card(String card) {
     	
     	this.card = card;
-		this.cardData = new ArrayList<String>();
-		this.bankAccountData = new ArrayList<String>();
-    	
-    	this.sqlConn = new SQLiteConnection();
+		this.cardData = new ArrayList<String[]>();
+		this.bankAccountData = new ArrayList<String[]>();
     	
     	String query = "SELECT * FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";	
-		arrayListFill(query, this.cardData);
+		this.cardData = arrayListFill(query);
 
 		query = "SELECT BANK.CustomerBankAccount, BANK.BankMoney FROM BANK WHERE BANK.CustomerCardNumber =" + "'" + this.card + "'";	
-		arrayListFill(query, this.bankAccountData);
+		this.bankAccountData = arrayListFill(query);
     }
 
-	public void arrayListFill(String query,ArrayList<String> arrayList){
+	public ArrayList<String[]> arrayListFill(String query){
 
-		if(this.sqlConn.makeDMLQuery(query)){
-			arrayList.addAll(this.sqlConn.getQueryResults());
+		ArrayList<String[]> arraylist = new ArrayList<String[]>();
+
+		if(Main.sql.makeDMLQuery(query)){	
+			arraylist =  Main.spliterator(Main.sql.getQueryResults());
 		}
+
+		return arraylist;
 	}
 
-	public ArrayList<String> getCardData() {
+	public ArrayList<String[]> getCardData() {
 		return cardData;
 	}
 
-	public void setCardData(ArrayList<String> cardData) {
+	public void setCardData(ArrayList<String[]> cardData) {
 		this.cardData = cardData;
 	}
 
-	public ArrayList<String> getBankAccountData() {
+	public ArrayList<String[]> getBankAccountData() {
 		return bankAccountData;
 	}
 
-	public void setBankAccountData(ArrayList<String> bankAccountData) {
+	public void setBankAccountData(ArrayList<String[]> bankAccountData) {
 		this.bankAccountData = bankAccountData;
 	}
 }

@@ -63,13 +63,9 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
     private Color ForegroundButton;
     private Color BackgroundButton;
 
-    private SQLiteConnection sqlConn;
-
-    private ArrayList<String> receivedData;
+    private ArrayList<String[]> receivedData;
 
     public  GUISignOrLogIn() {
-
-    	sqlConn = new SQLiteConnection();
         
         //--Colors--\\
         ForegroundLabel = new Color(43, 249, 194);
@@ -396,18 +392,18 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
         }
         else if(e.getSource().equals(ForgotCardNumberSubmitRequest)){
 
-            receivedData = new ArrayList<String>();
+            receivedData = new ArrayList<String[]>();
 
             char[] receivedPassword = this.ForgotCardNumberPINTextField.getPassword();
 
             String query = "SELECT CARDS.card_number FROM CARDS WHERE CARDS.last_name =" + "'" + this.ForgotCardNumberLastNameTextField.getText() + "'" + "AND CARDS.PIN =" + "'" + String.valueOf(receivedPassword) + "'";
 
-            if(!sqlConn.makeDMLQuery(query)){
+            if(!Main.sql.makeDMLQuery(query)){
                 JOptionPane.showMessageDialog(null, "Something went wrong! Invalid lastname or PIN");
             }
             else{
-                receivedData.addAll(sqlConn.getQueryResults());
-                this.ForgotCardNumberPasswordField.setText(receivedData.get(0));
+                receivedData = Main.spliterator(Main.sql.getQueryResults());
+                this.ForgotCardNumberPasswordField.setText(receivedData.get(0)[0]);
             }
         }
         else if(e.getSource().equals(SignInSubmitRequestButton)){
@@ -453,7 +449,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
                                                     + "'" + cvv 
                                                     + "'" + ")";
 
-                sqlConn.makeDMLQuery(query);
+                Main.sql.makeDMLQuery(query);
 
                 JOptionPane.showMessageDialog(null, "Your card has been successfully registered");
 
@@ -491,7 +487,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
                 this.card = this.LogInCardNumberTextField.getText();
 
                 query = "SELECT CARDS.card_number FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";
-                if(!sqlConn.makeDMLQuery(query)){
+                if(!Main.sql.makeDMLQuery(query)){
                     JOptionPane.showMessageDialog(null, "Your Card Number is incorrect! Try again.");
                 }
                 else{
@@ -512,7 +508,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
     
                     query = "SELECT CARDS.PIN FROM CARDS WHERE CARDS.PIN =" + "'" + pin + "'" + "AND CARDS.card_number =" + "'" + this.card + "'";
     
-                    if (!sqlConn.makeDMLQuery(query)) {
+                    if (!Main.sql.makeDMLQuery(query)) {
     
                         count--;
                         JOptionPane.showMessageDialog(null, "Wrong pin! You have " + count + " tries left.");
@@ -532,7 +528,7 @@ public class GUISignOrLogIn extends JFrame implements ActionListener{
                     
                     query = "DELETE FROM CARDS WHERE CARDS.card_number =" + "'" + this.card + "'";
                     
-                    sqlConn.makeDMLQuery(query);
+                    Main.sql.makeDMLQuery(query);
                     
                     query = "";
                 }          

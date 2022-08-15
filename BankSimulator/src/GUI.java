@@ -1,11 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class GUI extends JFrame implements ActionListener {
-
-	private ArrayList<String> queryResults = new ArrayList<>();
 
     private ImageIcon icon; // Image icon
 
@@ -132,9 +129,9 @@ public class GUI extends JFrame implements ActionListener {
         MainPageBankFunctionsLabel.setBackground(BackgroundButton);
         MainPageBankFunctionsLabel.setBounds(0,30,300,50);
 
-        MainPageBankWelcomeLabel = new JLabel("Welcome Back " + this.card.getCardData().get(1));
+        MainPageBankWelcomeLabel = new JLabel("Welcome Back " + this.card.getCardData().get(0)[1], SwingConstants.CENTER);
         MainPageBankWelcomeLabel.setForeground(ForegroundLabel);
-        MainPageBankWelcomeLabel.setBounds(75,15,260,20);
+        MainPageBankWelcomeLabel.setBounds(68,15,150,20);
         //----------\\
 
         //--Buttons--\\
@@ -210,6 +207,7 @@ public class GUI extends JFrame implements ActionListener {
         DepositPageBankTextField.setBounds(75,69,185,19);
 
         DepositPageBankPrivacyTextPane = new JTextPane();
+        DepositPageBankPrivacyTextPane.setEditable(false);
         DepositPageBankPrivacyTextPane.setContentType("text/html");
         DepositPageBankPrivacyTextPane.setText("<html><body><p style='color:rgb(43, 249, 194);font-size:7px;position:relative;margin-top:1rem;'><strong style='color:red;'>DISCLAIMER!</strong>Our bank provides all protection and security during the deposit of money in your account.<p style='color:rgb(43, 249, 194);font-size:7px;position:absolute;margin-left:130px;margin-top:0.5rem;'>©2022 MISA Privacy Policy</p></p></body></html>");
         DepositPageBankPrivacyTextPane.setBackground(BackgroundButton);
