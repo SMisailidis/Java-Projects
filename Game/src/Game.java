@@ -9,7 +9,8 @@ public class Game {
 
 		sql = new SQLiteConnection("Characters.db");
 
-		HeroSelectGUI w = new HeroSelectGUI();
+		//HeroSelectGUI w = new HeroSelectGUI();
+		new BoardGUI();
 	}
 	
 	public static void select(String name) {
