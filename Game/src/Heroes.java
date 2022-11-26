@@ -11,6 +11,8 @@ public class Heroes extends Characters {
 			this.stats.add(Integer.parseInt(results.get(0)[i]));
 		}
 
+		this.name = results.get(0)[0];
+
 		switch(results.get(0)[0]){
 			case "Ant-Man": //Special;
 			case "Black Panther": //Special;

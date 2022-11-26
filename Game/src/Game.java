@@ -3,14 +3,14 @@ import java.util.ArrayList;
 public class Game {
 
 	public static SQLiteConnection sql;
-	protected static ArrayList<Heroes> selectedHeroes = new ArrayList<>();
+	public static ArrayList<Heroes> selectedHeroes = new ArrayList<>();
 
 	public static void main(String[] args) {
 
 		sql = new SQLiteConnection("Characters.db");
 
-		//HeroSelectGUI w = new HeroSelectGUI();
-		new BoardGUI();
+		HeroSelectGUI w = new HeroSelectGUI();
+
 	}
 	
 	public static void select(String name) {

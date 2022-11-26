@@ -49,9 +49,9 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 		treeFill(); // Fill the treeMap
 		
 		do {
-			number = JOptionPane.showInputDialog(message, "Give me the number of players (from 1 to 4)");
-		}while(Integer.parseInt(number) < 1 || Integer.parseInt(number) > 4);
-		
+			number = JOptionPane.showInputDialog(message, "Give me the number of players (from 2 to 4)");
+		}while(Integer.parseInt(number) < 2 || Integer.parseInt(number) > 4);
+
 		//----------Frame----------\\
 		logo = new ImageIcon("src\\M.png"); // Frame's logo
 		
@@ -62,6 +62,7 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 		frame.setIconImage(logo.getImage()); // Logo definition
 		frame.setSize(800,500); // Set definition
 		frame.setResizable(false); // Doesn't allow the frame to resize 
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close when you press "X" on the frame
 		//-------------------------\\
 		
@@ -182,7 +183,9 @@ public class HeroSelectGUI extends JFrame implements ActionListener{
 				j++;
 			}
 			else {
-				//BoardGUI board = new BoardGUI();
+				
+				new BoardGUI();
+				// new GamePlay();
 				frame.setVisible(false);
 			}
 
