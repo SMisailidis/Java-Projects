@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         sql = new SQLiteConnection("Cards.db");
+        
 
         @SuppressWarnings("unused")
         GUISignOrLogIn start = new GUISignOrLogIn();
