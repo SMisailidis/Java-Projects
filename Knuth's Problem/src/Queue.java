@@ -3,9 +3,10 @@ import java.util.LinkedList;
 
 public class Queue {
 
-	LinkedList<Integer> queue;
+	LinkedList<Node> queue;
 	
 	public Queue() {
 		
+		this.queue = new LinkedList<Node>();
 	}
 }
