@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 	
 	static LocalDateTime afterOneMinute;
+	static int seconds;
+	static long mseconds;
 	
 	public static void main(String[] args) {
 		
@@ -33,32 +36,37 @@ public class Main {
 	    }while(selection != 1 && selection != 2);
 	    
 	    scanner.close();
+	    
+	    int secondsStart = LocalDateTime.now().getSecond();
 	    switch(selection) {
 	    	case 1: {
+	    		
 	    		afterOneMinute = LocalDateTime.now().plusMinutes(1);
 	    		Node found = BFS(g);
 	    		Number index = g.arr.findGoalIndex(found);
 	    		if(index != null) {	    			
 	    			g.arr.findPathOfGoal(index.intValue());
 	    			g.arr.printPath();
+	    			System.out.println("The time needed to find the target with BFS Algorithm was: " + (seconds - secondsStart) + "." + mseconds);
 	    		}
 	    		else {
-	    			System.out.println("Number not found!");
+	    			System.out.println("Number not found! Factorial Error");
 	    		}
 	    		
 	    		break;
 	    	}
 	    	case 2: {
+	    		
 	    		afterOneMinute = LocalDateTime.now().plusMinutes(1);
-	    		if(IterativeDeepeningSearch(g, 100)) {
+	    		if(IterativeDeepeningSearch(g, 1000)) {
 		    		double index = g.hashMap.getGoalIndex(goal);
 	    			g.hashMap.findPathOfGoal(index, initialNumber);
 	    			g.hashMap.printPath();
+	    			System.out.println("The time needed to find the target with Iterative Deepening Search Algorithm was: " + (seconds - secondsStart) + "." + mseconds);
 	    		}
 	    		break;
 	    	}
-	    }
-	    
+	    }  
 	}
 	
 	public static Node BFS(Graph g) {
@@ -83,7 +91,9 @@ public class Main {
 			for(Node child : node.Expand()) {
 				
 				LocalDateTime currTime = LocalDateTime.now();
-
+				seconds = currTime.getSecond();
+				mseconds =  TimeUnit.NANOSECONDS.convert(currTime.getNano(), TimeUnit.MILLISECONDS);
+				
 				if(currTime.getMinute() == afterOneMinute.getMinute() && currTime.getSecond() == afterOneMinute.getSecond()) {
 					System.out.println("Search is taking a lot of time, im shutting down!");
 					System.exit(0);
@@ -118,7 +128,9 @@ public class Main {
 	public static boolean DepthLimitedSearch(double initV, double goal, TreeMap<String, Node> hash,  int i) {
 		
 		LocalDateTime currTime = LocalDateTime.now();
-
+		seconds = currTime.getSecond();
+		mseconds =  TimeUnit.NANOSECONDS.convert(currTime.getNano(), TimeUnit.MILLISECONDS);
+		
 		if(currTime.getMinute() == afterOneMinute.getMinute() && currTime.getSecond() == afterOneMinute.getSecond()) {
 			System.out.println("Search is taking a lot of time, im shutting down!");
 			System.exit(0);

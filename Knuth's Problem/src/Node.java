@@ -5,18 +5,10 @@ public class Node {
 
 	double initV;
 	private String text;
-	Node previous, next;
-	double depth;
 	
 	public Node(double initialValue) {
 		
 		this.initV = initialValue;
-	}
-	
-	public Node(double initialValue, double depth) {
-		
-		this.initV = initialValue;
-		this.depth = depth;
 	}
 	
 	public Node(double initialValue, String type) {
@@ -60,8 +52,7 @@ public class Node {
 	
 	private long factorial(long num) {
 
-		if(num > 20) {
-
+		if(num > 23) {
 			return 0;
 		}
 		

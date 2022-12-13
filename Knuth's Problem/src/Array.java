@@ -25,7 +25,7 @@ public class Array {
 		
 		if(this.array.size() == 0) {
 			System.out.println("The number you have entered is the same as the goal!");
-			return 0;
+			System.exit(0);
 		}
 		
 		if(goal == null) {

@@ -18,7 +18,7 @@ public class Hash {
 		
 		if(this.hash.size() == 0) {
 			System.out.println("The number you have entered is the same as the goal!");
-			return 0;
+			System.exit(0);
 		}
 		
 		this.entries.forEach(entry -> {
