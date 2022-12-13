@@ -1,19 +1,21 @@
-import java.util.*;
-
 public class Graph {
 
-	Number initV, goalV;
-	Hashtable hashT;
+	double initV, goalV;
 	
-	public Graph(Number initialValue, Number goalValue) {
+	Array arr;
+	
+	Hash hashMap;
+	
+	public Graph(double initialValue, double goalValue) {
 	
 		this.initV = initialValue;
 		this.goalV = goalValue;
-		this.hashT = new Hashtable<Integer, Node>();
+		this.arr = new Array();
+		this.hashMap = new Hash();
 	}
 	
-	public boolean isGoal(Number value) {
+	public boolean isGoal(double value) {
 		
-		return value.floatValue() == this.goalV.floatValue(); 
+		return value == this.goalV; 
 	}
 }

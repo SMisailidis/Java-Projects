@@ -1,18 +1,28 @@
-import java.math.*;
 import java.util.*;
 
 
 public class Node {
 
-	Number initV;
-	int numberOfNodes = 0;
+	double initV;
 	private String text;
+	Node previous, next;
+	double depth;
 	
-	public Node(Number initialValue) {
+	public Node(double initialValue) {
 		
 		this.initV = initialValue;
-		this.numberOfNodes++;
-		this.text = "";
+	}
+	
+	public Node(double initialValue, double depth) {
+		
+		this.initV = initialValue;
+		this.depth = depth;
+	}
+	
+	public Node(double initialValue, String type) {
+		
+		this.initV = initialValue;
+		this.text = type;
 	}
 	
 	public ArrayList<Node> Expand() {
@@ -20,36 +30,37 @@ public class Node {
 		ArrayList<Node> nodes = new ArrayList<Node>();
 		
 		Number curValue = this.initV;
-		
-		if(Math.abs(this.initV.floatValue() - this.initV.intValue()) < 0.00000001){
-			curValue = this.initV.intValue();
+
+		if(Math.abs(this.initV - (int)this.initV) < 0.00000001){
+			curValue = (int) this.initV;
 		}
 		
 		double floorV = Math.floor(curValue.floatValue());
 
-		if(this.initV.doubleValue() == floorV) {
+		if(this.initV == floorV) {
 			//Enters here only if the number is Integer
-			double factV = this.factorial(curValue.longValue());
-			if(factV != 0) {				
-				nodes.add(new Node(factV));
-				System.out.println("Factorial");
+			
+			if(curValue.longValue() < 60) {
+				
+				double factV = this.factorial(curValue.longValue());
+				if(factV != 0) {				
+					nodes.add(new Node(factV, "Factorial"));
+				}
 			}
 		}
 		else {
 			//Enters here only if the number is double
-			nodes.add(new Node(floorV));
-			System.out.println("Floor");
+			nodes.add(new Node(floorV, "Floor"));
 		}
-		double sqrtV = Math.sqrt(this.initV.floatValue());
-		nodes.add(new Node(sqrtV));
-		System.out.println("root");
+		double sqrtV = Math.sqrt(this.initV);
+		nodes.add(new Node(sqrtV, "root"));
 
 		return nodes;
 	}
 	
 	private long factorial(long num) {
 
-		if(num > 66) {
+		if(num > 20) {
 
 			return 0;
 		}
