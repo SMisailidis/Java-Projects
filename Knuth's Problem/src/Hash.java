@@ -50,7 +50,7 @@ public class Hash {
 				}
 			});
 			findPathOfGoal(Double.parseDouble(this.key), initialNum);
-	}
+		}
 
 		return;	
 	}

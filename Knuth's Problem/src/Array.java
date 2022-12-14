@@ -5,7 +5,7 @@ public class Array {
 	
 	ArrayList<ArrayList<Node>> array;
 	ArrayList<Node> goalPath;
-	int i,j, index;
+	int i, index;
 	
 	public Array() {
 		this.array = new ArrayList<ArrayList<Node>>();
