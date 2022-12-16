@@ -24,7 +24,7 @@ public class Node {
 		
 		ArrayList<Node> nodes = new ArrayList<Node>();
 		
-		Number curValue = this.initV;
+		double curValue = this.initV;
 
 		double sqrtV = Math.sqrt(this.initV);
 		nodes.add(new Node(sqrtV, "root", parentKey));
@@ -33,14 +33,14 @@ public class Node {
 			curValue = (int) this.initV;
 		}
 		
-		double floorV = Math.floor(curValue.doubleValue());
+		double floorV = Math.floor(curValue);
 
 		if(this.initV == floorV) {
 			//Enters here only if the number is Integer
 			
-			if(curValue.longValue() < 60) {
+			if(curValue < 60) {
 				
-				double factV = this.factorial(curValue.longValue());
+				double factV = this.factorial(curValue);
 				if(factV != 0) {				
 					nodes.add(new Node(factV, "Factorial", parentKey));
 				}

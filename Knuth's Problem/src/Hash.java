@@ -14,8 +14,8 @@ public class Hash {
 		this.entries = this.hash.entrySet();
 	}
 	
-	public void addValue(int initV, Node value) {
-		this.hash.put(initV, value);
+	public void addValue(int id, Node value) {
+		this.hash.put(id, value);
 	}
 	
 	public int getKey(double value) {
