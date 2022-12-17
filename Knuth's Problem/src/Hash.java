@@ -3,18 +3,19 @@ import java.util.Map.Entry;
 
 public class Hash {
 
-	TreeMap<Integer, Node> hash;
-	ArrayList<Node> pathGoal;
-	Integer key, previous;
-	Set<Entry<Integer, Node>> entries;
+	private TreeMap<Integer, Node> hash;
+	private ArrayList<Node> pathGoal;
+	private int key, previous, id;
+	private Set<Entry<Integer, Node>> entries;
 	
 	public Hash() {
 		this.hash = new TreeMap<Integer, Node>();
 		this.pathGoal = new ArrayList<Node>();
+		this.id = 0;
 		this.entries = this.hash.entrySet();
 	}
 	
-	public void addValue(int id, Node value) {
+	public void add(int id, Node value) {
 		this.hash.put(id, value);
 	}
 	
@@ -26,7 +27,7 @@ public class Hash {
 		}
 		
 		this.entries.forEach(entry -> {
-			if(value == entry.getValue().initV) {
+			if(value == entry.getValue().getInitV()) {
 				this.key = entry.getKey();
 			}
 		});
@@ -34,7 +35,12 @@ public class Hash {
 		return this.key;
 	}
 	
-	public void findPathOfGoal(int id, double initialNum) {
+	public int getId() {
+		this.id++;
+		return this.id;
+	}
+	
+	public void getPathToGoal(int id, double initialNum) {
 		
 		if(id == -1) {
 			return;
@@ -44,19 +50,19 @@ public class Hash {
 
 		this.entries.forEach(entry -> {
 			if(entry.getKey() == id) {
-				this.previous = entry.getValue().previous;
+				this.previous = entry.getValue().getPrevious();
 			}
 		});
 		
-		findPathOfGoal(this.previous, initialNum);
+		getPathToGoal(this.previous, initialNum);
 	}
 	
 	public void printPath() {
 		Collections.reverse(this.pathGoal);
 		
 		for(Node r : this.pathGoal) {
-			if(r.getText() != null) {	
-				System.out.println(r.getText());
+			if(r.getOperation() != null) {	
+				System.out.println(r.getOperation());
 			}
 		}
 	}

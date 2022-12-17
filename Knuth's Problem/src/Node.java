@@ -3,9 +3,9 @@ import java.util.*;
 
 public class Node {
 
-	double initV;
-	int previous;
-	private String text;
+	private double initV;
+	private int previous;
+	private String operation;
 	
 	public Node(double initialValue, int previous) {
 		
@@ -13,10 +13,10 @@ public class Node {
 		this.previous = previous;
 	}
 	
-	public Node(double initialValue, String type, int previous) {
+	public Node(double initialValue, String operation, int previous) {
 		
 		this.initV = initialValue;
-		this.text = type;
+		this.operation = operation;
 		this.previous = previous;
 	}
 	
@@ -35,9 +35,7 @@ public class Node {
 		
 		double floorV = Math.floor(curValue);
 
-		if(this.initV == floorV) {
-			//Enters here only if the number is Integer
-			
+		if(this.initV == floorV) {			
 			if(curValue < 60) {
 				
 				double factV = this.factorial(curValue);
@@ -47,7 +45,6 @@ public class Node {
 			}
 		}
 		else {
-			//Enters here only if the number is double
 			nodes.add(new Node(floorV, "Floor", parentKey));
 		}
 
@@ -62,11 +59,15 @@ public class Node {
 		return num * this.factorial(num - 1);
 	}
 	
-	public String getText() {
-		return text;
+	public String getOperation() {
+		return operation;
 	}
 	
-	public void setText(String text) {
-		this.text = text;
+	public double getInitV() {
+		return initV;
+	}
+
+	public int getPrevious() {
+		return previous;
 	}
 }
