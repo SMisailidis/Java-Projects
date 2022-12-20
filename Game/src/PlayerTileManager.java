@@ -10,7 +10,7 @@ public class PlayerTileManager {
     
     BoardPanelGUI gp;
     PlayerTile[] tile;
-    int mapTileNum[][];
+   // int mapTileNum[][];
 
 
     public PlayerTileManager(BoardPanelGUI gp) {
@@ -44,10 +44,11 @@ public class PlayerTileManager {
 
         int temp = 0;
         for (int i = 0; i < Game.selectedHeroes.size(); i++) {
-            
             g2.drawImage(tile[i].image, gp.playersX[i] - temp, gp.playersY[i], gp.HeroesSize, gp.HeroesSize, null);
             tile[i].rect.x = gp.playersX[i] - temp;
             tile[i].rect.y = gp.playersY[i];
+            g2.setColor(Color.red);
+            g2.drawRect(gp.playersX[i] - temp, gp.playersY[i], gp.HeroesSize, gp.HeroesSize);
             temp += 16;
         }
     }

@@ -4,34 +4,39 @@ import java.util.Random;
 public class Heroes extends Characters {
 
 	protected ArrayList<Villains> villians = new ArrayList<Villains>();
+	String direction;
 
 	public Heroes(ArrayList<String[]> results){
+		
+		this.direction = "right";
 		
 		for(int i=1;i<7;i++){
 			this.stats.add(Integer.parseInt(results.get(0)[i]));
 		}
 
 		this.name = results.get(0)[0];
+		
+		
 
-		switch(results.get(0)[0]){
-			case "Ant-Man": //Special;
-			case "Black Panther": //Special;
-			case "Black Widow": //Special;                                                                                                                                                                                                                                                                                                                                   	case "Captain America": //Special;
-			case "Dr Strange": //Special;
-			case "Drax": //Special;
-			case "Gamora": //Special;
-			case "Groot": //Special;
-			case "Hawkeye": //Special;
-			case "Hulk": //Special;
-			case "Iron Man": //Special;
-			case "Rocket Raccoon": //Special;
-			case "Scarlet Witch": //Special;
-			case "Spider-Man": //Special;
-			case "Starlord": //Special;
-			case "Thor": //Special;
-			case "Vision": //Special;
-			case "Wong": //Special;
-		}
+//		switch(results.get(0)[0]){
+//			case "Ant-Man": //Special;
+//			case "Black Panther": //Special;
+//			case "Black Widow": //Special;                                                                                                                                                                                                                                                                                                                                   	case "Captain America": //Special;
+//			case "Dr Strange": //Special;
+//			case "Drax": //Special;
+//			case "Gamora": //Special;
+//			case "Groot": //Special;
+//			case "Hawkeye": //Special;
+//			case "Hulk": //Special;
+//			case "Iron Man": //Special;
+//			case "Rocket Raccoon": //Special;
+//			case "Scarlet Witch": //Special;
+//			case "Spider-Man": //Special;
+//			case "Starlord": //Special;
+//			case "Thor": //Special;
+//			case "Vision": //Special;
+//			case "Wong": //Special;
+//		}
 	}
 
 }

@@ -20,6 +20,8 @@ public class BoardPanelGUI extends JPanel implements Runnable{
 	public int round = 0;
 	public int roll = 0;
 	public int stopUpdate = 0;
+	public int checkEnd = 0;
+	public int checkDown = 0;
 	public boolean roundFlag = false;
 
 	int[] playersX = new int[Game.selectedHeroes.size()];
@@ -91,13 +93,64 @@ public class BoardPanelGUI extends JPanel implements Runnable{
 	}
 
 	public void update() {
-
+		
+		
+		System.out.println("stopUpdate " + stopUpdate);
+		System.out.println("checkEnd " + checkEnd);
+		System.out.println("checkDown " + checkDown);
+		System.out.println("----------------------");
+		
 		if(stopUpdate < roll * tileSize){
-			playersX[round]++;
-			stopUpdate++;
+			if(Game.selectedHeroes.get(round).direction.equals("right")) {
+				if(checkEnd < tileSize && checkDown == 0) {
+					playersX[round]++;
+					checkEnd++;
+				}
+				else {
+					if((playersX[round] + tileSize) > screenWidth - round*16 || (playersX[round] + tileSize) > screenWidth) {
+						playersY[round]++;
+						checkDown++;
+					}
+					
+					if(checkDown >= tileSize - 1) {
+						checkDown = 0;
+						
+						Game.selectedHeroes.get(round).direction = "left";
+					}
+					
+					checkEnd = 0;
+				}
+			}
+			else {
+				if(checkEnd != tileSize && checkDown == 0) {
+					playersX[round]--;
+					checkEnd++;
+				}
+				else {
+					
+					if((playersX[round]) < 32) {
+						playersY[round]++;
+						checkDown++;
+					}
+					
+					if(checkDown >= tileSize - 1) {
+						checkDown = 0;
+						
+						Game.selectedHeroes.get(round).direction = "right";						
+						
+					}
+					
+					checkEnd = 0;
+				}
+				
+			}
+			stopUpdate++;			
+			
 		}
 		else if(stopUpdate == roll * tileSize && roundFlag) {
 
+			checkDown = 0;
+			checkEnd = 0;
 			stopUpdate = 0;
 			roll = 0;
 			roundFlag = false;
@@ -110,6 +163,7 @@ public class BoardPanelGUI extends JPanel implements Runnable{
                 round = 0;
 			}
 		}
+		
 	}
 
 	public void paintComponent(Graphics g) {
@@ -124,6 +178,4 @@ public class BoardPanelGUI extends JPanel implements Runnable{
 		g2.dispose();
 
 	}
-
-	
 }

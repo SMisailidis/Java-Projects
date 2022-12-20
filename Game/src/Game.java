@@ -9,7 +9,7 @@ public class Game {
 
 		sql = new SQLiteConnection("Characters.db");
 
-		HeroSelectGUI w = new HeroSelectGUI();
+		new HeroSelectGUI();
 
 	}
 	
