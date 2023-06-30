@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a42180a-bd5d-4901-bb33-62f1496e8f13" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BankSimulator/bin/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/../BankSimulator/bin/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Knuth's Problem/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../Knuth's Problem/bin/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Knuth's Problem/src/BfsAlgorithm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Knuth's Problem/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Knuth's Problem/src/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Knuth's Problem/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Knuth's Problem/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Knuth's Problem/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Knuth's Problem/src/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Knuth's Problem/src/Queue.java" beforeDir="false" />
-    </list>
+    <list default="true" id="e6463071-b686-4d3a-998d-37ca26fff332" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="ProjectId" id="2IrQATxshbko7zfGIBTdGmDHO8W" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2RvtQVBwaofGVC4yfVvpJbHI9qf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -27,29 +15,21 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4a42180a-bd5d-4901-bb33-62f1496e8f13" name="Changes" comment="" />
-      <created>1670937081541</created>
+      <changelist id="e6463071-b686-4d3a-998d-37ca26fff332" name="Changes" comment="" />
+      <created>1688142367071</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1670937081541</updated>
+      <updated>1688142367071</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>
